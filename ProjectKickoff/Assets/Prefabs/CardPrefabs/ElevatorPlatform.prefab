@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7745977058326044016}
   - component: {fileID: 362305903506870601}
   - component: {fileID: 2596515939067844177}
+  - component: {fileID: 6625149055481410893}
   m_Layer: 0
-  m_Name: SolidPlatform
+  m_Name: ElevatorPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 350b8df3474ca10479a1fa3263a4033c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04b5036c16ed6e447a064bb782972fd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,3 +135,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1.44}
   m_EdgeRadius: 0
+--- !u!114 &6625149055481410893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669745024024638310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c815f712059ac84d95fdc3b114014e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
