@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     public float moveSpeed = 1;
+    public float sprintMultiplier = 2;
     public float jumpForce = 1;
     void Awake()
     {
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Walk
-        transform.Translate( new(moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0) );
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed; 
+        transform.Translate( new(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0) );
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
@@ -29,25 +31,27 @@ public class PlayerController : MonoBehaviour
 
     bool GroundedCheck()
     {
-        /// Collision testing
-        bool collisionLeft = Physics2D.Raycast(
-            this.transform.position - .49f * new Vector3(-this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down, .1f, ~LayerMask.GetMask("Player"));
-        bool collisionRight = Physics2D.Raycast(
-            this.transform.position - .49f * new Vector3(this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down, .1f, ~LayerMask.GetMask("Player"));
+        // Collision testing
+        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
+            this.transform.lossyScale * .5f, 0, Vector3.down, .1f, ~LayerMask.GetMask("Player"));
+        bool hitSomething = hit.collider != null;
+        bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) <= 0;
 
-        Debug.DrawRay(this.transform.position - .49f * new Vector3(-this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down * .1f, collisionLeft ? Color.green : Color.red, 1);
-        Debug.DrawRay(this.transform.position - .49f * new Vector3(this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down * .1f, collisionRight ? Color.green : Color.red, 1);
+        // Debug
+        Bounds bounds = new(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f)
+            , this.transform.lossyScale);
+        DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red, 1);
+        DebugExtension.DebugArrow(hit.point, hit.normal, angleOutOfRange ? Color.red : Color.green, 1);
 
-        print($"{collisionLeft}, {collisionRight}");
-        return collisionLeft || collisionRight;
+        // prevent terrain like walls from returning true
+        if (angleOutOfRange) return false;
+
+        //print($"{hitSomething}");
+        return hitSomething;
     }
 
     void DoJump()
     {
-        _rigidbody.AddForce (transform.up * jumpForce);
+        _rigidbody.AddForce(transform.up * jumpForce);
     }
 }
