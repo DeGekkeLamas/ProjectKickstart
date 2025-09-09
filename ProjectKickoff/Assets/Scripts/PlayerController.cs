@@ -19,8 +19,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Walk
-        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed; 
-        transform.Translate( new(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0) );
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || 
+            Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
+
+        _rigidbody.AddForceX(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+        //transform.Translate(new(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0));
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
