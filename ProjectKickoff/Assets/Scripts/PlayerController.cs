@@ -31,21 +31,21 @@ public class PlayerController : MonoBehaviour
 
     bool GroundedCheck()
     {
-        /// Collision testing
-        bool collisionLeft = Physics2D.Raycast(
-            this.transform.position - .49f * new Vector3(-this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down, .1f, ~LayerMask.GetMask("Player"));
-        bool collisionRight = Physics2D.Raycast(
-            this.transform.position - .49f * new Vector3(this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down, .1f, ~LayerMask.GetMask("Player"));
+        // Collision testing
+        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
+            this.transform.lossyScale * .5f, 0, Vector3.down, .1f, ~LayerMask.GetMask("Player"));
+        bool hitSomething = hit.collider != null;
+        // Debug
+        Bounds bounds = new(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f)
+            , this.transform.lossyScale);
+        DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red, 1);
 
-        Debug.DrawRay(this.transform.position - .49f * new Vector3(-this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down * .1f, collisionLeft ? Color.green : Color.red, 1);
-        Debug.DrawRay(this.transform.position - .49f * new Vector3(this.transform.localScale.x, this.transform.localScale.y, 0),
-            Vector3.down * .1f, collisionRight ? Color.green : Color.red, 1);
+        // prevent terrain like walls from returning true
+        if (Vector2.Dot(Vector2.up, hit.normal) > 90) return false;
 
-        print($"{collisionLeft}, {collisionRight}");
-        return collisionLeft || collisionRight;
+
+        print($"{hitSomething}");
+        return hitSomething;
     }
 
     void DoJump()
