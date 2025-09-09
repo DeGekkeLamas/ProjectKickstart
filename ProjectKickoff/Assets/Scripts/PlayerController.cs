@@ -19,18 +19,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Walk
-        float movement = Input.GetAxis("Horizontal");
-        if (movement != 0)
-        {
-            // Dont move is an object is in the way
-            RaycastHit2D hitL = Physics2D.BoxCast(this.transform.position - new Vector3(this.transform.lossyScale.x * .5f, 0),
-                this.transform.lossyScale * .5f, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
-            RaycastHit2D hitR = Physics2D.BoxCast(this.transform.position + new Vector3(this.transform.lossyScale.x * .5f, 0),
-                this.transform.lossyScale * .5f, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || 
+            Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
 
-            float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
-            transform.Translate(new(usedMoveSpeed * Time.deltaTime * movement, 0));
-        }
+        _rigidbody.AddForceX(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+        //transform.Translate(new(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0));
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
