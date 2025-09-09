@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     public float moveSpeed = 1;
-    public float sprintMultiplier;
+    public float sprintMultiplier = 2;
     public float jumpForce = 1;
     void Awake()
     {
@@ -41,10 +41,9 @@ public class PlayerController : MonoBehaviour
         DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red, 1);
 
         // prevent terrain like walls from returning true
-        if (Vector2.Dot(Vector2.up, hit.normal) > 90) return false;
+        if (Vector2.Dot(Vector2.up, hit.normal) <= 0) return false;
 
-
-        print($"{hitSomething}");
+        //print($"{hitSomething}");
         return hitSomething;
     }
 
