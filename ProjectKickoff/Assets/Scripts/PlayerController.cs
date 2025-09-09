@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     public float moveSpeed = 1;
+    public float sprintMultiplier;
     public float jumpForce = 1;
     void Awake()
     {
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Walk
-        transform.Translate( new(moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0) );
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed; 
+        transform.Translate( new(usedMoveSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0) );
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
@@ -48,6 +50,6 @@ public class PlayerController : MonoBehaviour
 
     void DoJump()
     {
-        _rigidbody.AddForce (transform.up * jumpForce);
+        _rigidbody.AddForce(transform.up * jumpForce);
     }
 }
