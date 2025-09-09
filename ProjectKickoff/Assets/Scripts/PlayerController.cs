@@ -35,13 +35,16 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
             this.transform.lossyScale * .5f, 0, Vector3.down, .1f, ~LayerMask.GetMask("Player"));
         bool hitSomething = hit.collider != null;
+        bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) <= 0;
+
         // Debug
         Bounds bounds = new(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f)
             , this.transform.lossyScale);
         DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red, 1);
+        DebugExtension.DebugArrow(hit.point, hit.normal, angleOutOfRange ? Color.red : Color.green, 1);
 
         // prevent terrain like walls from returning true
-        if (Vector2.Dot(Vector2.up, hit.normal) <= 0) return false;
+        if (angleOutOfRange) return false;
 
         //print($"{hitSomething}");
         return hitSomething;
