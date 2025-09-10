@@ -18,13 +18,13 @@ public class CardHandLayout : MonoBehaviour
         rotationRange = new(rotationRange.x, Mathf.Max(rotationRange.x, rotationRange.y));
         PlacementRange = new(PlacementRange.x, Mathf.Max(PlacementRange.x, PlacementRange.y));
     }
-    private void Awake()
-    {
-        SetCardPositions();
-    }
+    //private void Awake()
+    //{
+    //    SetCardPositions();
+    //}
 
     [Button]
-    void SetCardPositions()
+    public void SetCardPositions()
     {
         float canvasScale = transform.root.localScale.x;
         if (currentCards.Count < 1)
