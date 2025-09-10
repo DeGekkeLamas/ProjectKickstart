@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxScaleFactor: 1.5
   animationDuration: 15
+  extraHeight: 60
 --- !u!114 &873313745366597584
 MonoBehaviour:
   m_ObjectHideFlags: 0

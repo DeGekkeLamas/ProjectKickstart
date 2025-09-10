@@ -7,17 +7,23 @@ public class FoldoutCard : MonoBehaviour
     Vector3 originalRotation;
     public float maxScaleFactor = 3;
     public int animationDuration = 30;
+    public float extraHeight = 30;
 
     bool isFoldingOut;
     bool isFoldingIn;
+    bool hasEnteredHover;
     private void Awake()
     {
         originalScale = transform.localScale;
     }
     public void Foldout()
     {
+        if (!isFoldingOut && !isFoldingIn && !hasEnteredHover)
+        {
+            hasEnteredHover = true;
             StartCoroutine(FoldoutAnimation());
             Debug.Log("Folded out card");
+        }
     }
     IEnumerator FoldoutAnimation()
     {
@@ -36,6 +42,7 @@ public class FoldoutCard : MonoBehaviour
             this.transform.localScale *= factor;
             this.transform.eulerAngles = Vector3.Lerp(originalRotation, !CloserToPlusSide(originalRotation.z, 0) ? 
                 Vector3.zero : new(0,0,360), inverseDuration * (i+1));
+            this.transform.position += new Vector3(0,extraHeight/animationDuration,0) * transform.root.localScale.x;
 
             yield return new WaitForFixedUpdate();
         }
@@ -43,17 +50,20 @@ public class FoldoutCard : MonoBehaviour
     }
     public void Foldin()
     {
+        if (!isFoldingIn && hasEnteredHover)
+        {
             StartCoroutine(FoldinAnimation());
             Debug.Log("Folded in card");
+        }
     }
     IEnumerator FoldinAnimation()
     {
+        isFoldingIn = true;
         while (isFoldingOut)
         {
             yield return null;
         }
 
-        isFoldingIn = true;
         float inverseDuration = 1f / animationDuration;
         float factor = Mathf.Pow(1f/maxScaleFactor, inverseDuration);
 
@@ -62,10 +72,12 @@ public class FoldoutCard : MonoBehaviour
             this.transform.localScale *= factor;
             this.transform.eulerAngles = Vector3.Lerp(!CloserToPlusSide(originalRotation.z, 0) ?
                 Vector3.zero : new(0, 0, 360), originalRotation, inverseDuration * (i+1));
+            this.transform.position -= new Vector3(0, extraHeight/animationDuration, 0) * transform.root.localScale.x;
 
             yield return new WaitForFixedUpdate();
         }
         isFoldingIn = false;
+        hasEnteredHover = false;
     }
 
     // Determines which direction is shorter for rotation
