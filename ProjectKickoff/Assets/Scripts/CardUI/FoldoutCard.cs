@@ -9,6 +9,7 @@ public class FoldoutCard : MonoBehaviour
     public int animationDuration = 30;
     public float extraHeight = 30;
 
+    [HideInInspector] public int index;
     bool isFoldingOut;
     bool isFoldingIn;
     bool hasEnteredHover;
@@ -88,6 +89,21 @@ public class FoldoutCard : MonoBehaviour
         }
         isFoldingIn = false;
         hasEnteredHover = false;
+    }
+
+    public void PickThisCard()
+    {
+        GameObject placerObj = new("CardPlacer");
+        CardPlacer placer = placerObj.AddComponent<CardPlacer>();
+        placer.card = GameManager.instance.currentCards[index];
+        RemoveThisCard();
+    }
+
+    void RemoveThisCard()
+    {
+        CardHandLayout cardSet = this.transform.parent.GetComponent<CardHandLayout>();
+        Destroy(this.gameObject);
+        GameManager.instance.RemoveCard(GameManager.instance.currentCards[index]);
     }
 
     /// <summary>

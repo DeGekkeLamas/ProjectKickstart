@@ -9,7 +9,8 @@ public class CardPlacer : MonoBehaviour
     static GameObject cardContainer;
     new SpriteRenderer renderer;
 
-    private void Awake()
+
+    private void Start()
     {
         if (cardContainer == null) cardContainer = new GameObject("CardContainer");
         GameObject cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
