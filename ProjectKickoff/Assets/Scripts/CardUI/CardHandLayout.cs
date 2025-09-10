@@ -14,9 +14,9 @@ public class CardHandLayout : MonoBehaviour
 
     private void OnValidate()
     {
-        rotationRange = new(rotationRange.x, Mathf.Max(rotationRange.x+1, rotationRange.y));
-        PlacementRange = new(PlacementRange.x, Mathf.Max(PlacementRange.x+1, PlacementRange.y));
-        //SetCardPositions();
+        // Ensure max value isnt less than min value
+        rotationRange = new(rotationRange.x, Mathf.Max(rotationRange.x, rotationRange.y));
+        PlacementRange = new(PlacementRange.x, Mathf.Max(PlacementRange.x, PlacementRange.y));
     }
     private void Awake()
     {

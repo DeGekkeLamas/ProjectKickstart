@@ -16,6 +16,9 @@ public class FoldoutCard : MonoBehaviour
     {
         originalScale = transform.localScale;
     }
+    /// <summary>
+    /// Folds the card from your hand out to be better visible
+    /// </summary>
     public void Foldout()
     {
         if (!isFoldingOut && !isFoldingIn && !hasEnteredHover)
@@ -27,6 +30,7 @@ public class FoldoutCard : MonoBehaviour
     }
     IEnumerator FoldoutAnimation()
     {
+        // Wait if animation is still ongoing
         while (isFoldingIn)
         {
             yield return null;
@@ -37,6 +41,7 @@ public class FoldoutCard : MonoBehaviour
         float inverseDuration = 1f / animationDuration;
         float factor = Mathf.Pow(maxScaleFactor, inverseDuration);
 
+        // Movements
         for (int i = 0; i < animationDuration; i++)
         {
             this.transform.localScale *= factor;
@@ -48,6 +53,9 @@ public class FoldoutCard : MonoBehaviour
         }
         isFoldingOut = false;
     }
+    /// <summary>
+    /// Folds card back into your hand
+    /// </summary>
     public void Foldin()
     {
         if (!isFoldingIn && hasEnteredHover)
@@ -58,6 +66,7 @@ public class FoldoutCard : MonoBehaviour
     }
     IEnumerator FoldinAnimation()
     {
+        // Wait if animation is still ongoing
         isFoldingIn = true;
         while (isFoldingOut)
         {
@@ -67,6 +76,7 @@ public class FoldoutCard : MonoBehaviour
         float inverseDuration = 1f / animationDuration;
         float factor = Mathf.Pow(1f/maxScaleFactor, inverseDuration);
 
+        // Movements
         for (int i = 0; i < animationDuration; i++)
         {
             this.transform.localScale *= factor;
@@ -80,7 +90,9 @@ public class FoldoutCard : MonoBehaviour
         hasEnteredHover = false;
     }
 
-    // Determines which direction is shorter for rotation
+    /// <summary>
+    /// Determines which direction is shorter for rotation
+    /// </summary>
     static bool CloserToPlusSide(float currentRotation, float destination)
     {
         float differenceUp = (360 + destination - currentRotation) % 360;
