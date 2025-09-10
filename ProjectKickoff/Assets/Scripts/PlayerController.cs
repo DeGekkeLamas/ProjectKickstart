@@ -20,17 +20,9 @@ public class PlayerController : MonoBehaviour
     {
         // Walk
         float movement = Input.GetAxis("Horizontal");
-        if (movement != 0)
-        {
-            // Dont move is an object is in the way
-            RaycastHit2D hitL = Physics2D.BoxCast(this.transform.position - new Vector3(this.transform.lossyScale.x * .5f, 0),
-                this.transform.lossyScale * .5f, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
-            RaycastHit2D hitR = Physics2D.BoxCast(this.transform.position + new Vector3(this.transform.lossyScale.x * .5f, 0),
-                this.transform.lossyScale * .5f, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
-
-            float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
-            transform.Translate(new(usedMoveSpeed * Time.deltaTime * movement, 0));
-        }
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
+        DoMove(Vector2.right * movement * usedMoveSpeed * Time.deltaTime);
+        
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
@@ -63,5 +55,28 @@ public class PlayerController : MonoBehaviour
     void DoJump()
     {
         _rigidbody.AddForce(transform.up * jumpForce);
+    }
+
+    public bool DoMove(Vector2 movement)//tests horizontalMovement
+    {
+        if (movement == Vector2.zero) return false;
+        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
+        RaycastHit2D hit;
+        if (movement.x > 0)
+        {
+            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+        }
+        else
+        {
+            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
+        }
+        if (hit)
+        {
+            movement = movement * hit.fraction;
+        }
+
+        
+        transform.Translate(movement);
+        return true;
     }
 }
