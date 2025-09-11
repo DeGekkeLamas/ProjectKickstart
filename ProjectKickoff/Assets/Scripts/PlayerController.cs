@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1;
     public float sprintMultiplier = 2;
     public float jumpForce = 1;
+    [Tooltip("Multiplies with jumpforce, set to 1 to be the same as jumpforce")]
+    public float wallJumpIntensity = .5f;
     void Awake()
     {
         instance = this;
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
         // Walk
         float movement = Input.GetAxis("Horizontal");
         float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
-        DoMove(Vector2.right * movement * usedMoveSpeed * Time.deltaTime);
+        DoMove(movement * usedMoveSpeed * Time.deltaTime * Vector2.right);
         
 
         // Jump
@@ -74,7 +76,6 @@ public class PlayerController : MonoBehaviour
     public bool DoMove(Vector2 movement)//tests horizontalMovement
     {
         if (movement == Vector2.zero) return false;
-        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
         RaycastHit2D hit;
         if (movement.x > 0)
         {
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
         }
         if (hit)
         {
-            movement = movement * hit.fraction;
+            movement *= hit.fraction;
         }
 
         
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     void WallJump(Vector3 direction)
     {
-        _rigidbody.AddForce(direction.normalized * jumpForce);
-        DoJump();
+        _rigidbody.AddForce(jumpForce * wallJumpIntensity * direction.normalized);
+        _rigidbody.AddForce(jumpForce * wallJumpIntensity * Vector3.up);
     }
 }
