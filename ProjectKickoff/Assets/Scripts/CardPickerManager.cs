@@ -15,7 +15,6 @@ public class CardPickerManager : MonoBehaviour
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
     public List<GameObject> collectdCards = new();
-    public GameManager gameManager;
     
 
     private GameObject GenerateRandomCard()
@@ -58,7 +57,6 @@ public class CardPickerManager : MonoBehaviour
     public void CollectCard(GameObject instance, GameObject prefabReference)
     {
         instance.gameObject.SetActive(false);
-        
-        gameManager.AddCard(prefabReference);
+        GameManager.instance.AddCardToDeck(prefabReference);
     }
 }

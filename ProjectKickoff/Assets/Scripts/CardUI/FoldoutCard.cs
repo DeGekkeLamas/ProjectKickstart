@@ -103,7 +103,7 @@ public class FoldoutCard : MonoBehaviour
         isCurrentlyPlacingCard = true;
         GameObject placerObj = new("CardPlacer");
         CardPlacer placer = placerObj.AddComponent<CardPlacer>();
-        placer.card = GameManager.instance.currentCards[index];
+        placer.card = GameManager.instance.cardsInHand[index];
         RemoveThisCard();
     }
 
@@ -111,7 +111,7 @@ public class FoldoutCard : MonoBehaviour
     {
         CardHandLayout cardSet = this.transform.parent.GetComponent<CardHandLayout>();
         Destroy(this.gameObject);
-        GameManager.instance.RemoveCard(GameManager.instance.currentCards[index]);
+        GameManager.instance.RemoveCardFromHand(GameManager.instance.cardsInHand[index]);
     }
 
     /// <summary>

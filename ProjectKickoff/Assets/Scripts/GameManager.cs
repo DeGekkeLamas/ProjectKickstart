@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<GameObject> currentCards = new();
+    public List<GameObject> cardsInHand = new();
+    public List<GameObject> cardsInDeck = new();
     public static GameManager instance;
 
     public CardHandLayout cardUI;
@@ -23,24 +24,34 @@ public class GameManager : MonoBehaviour
             Destroy(cardUI.transform.GetChild(i-1).gameObject);
         }
         cardUI.currentCards.Clear();
-        for (int i = 0; i < currentCards.Count; i++)
+        for (int i = 0; i < cardsInHand.Count; i++)
         {
             FoldoutCard card = Instantiate(cardElement, cardUI.transform);
-            card.GetComponent<Image>().sprite = currentCards[i].GetComponent<SpriteRenderer>().sprite;
+            card.GetComponent<Image>().sprite = cardsInHand[i].GetComponent<SpriteRenderer>().sprite;
             card.index = i;
             cardUI.currentCards.Add(card.gameObject);
         }
         cardUI.SetCardPositions();
     }
 
-    public void AddCard(GameObject cardToAdd)
+    public void AddCardToHand(GameObject cardToAdd)
     {
-        currentCards.Add(cardToAdd);
+        cardsInHand.Add(cardToAdd);
         UpdateCards();
     }
-    public void RemoveCard(GameObject cardToRemove)
+    public void RemoveCardFromHand(GameObject cardToRemove)
     {
-        currentCards.Remove(cardToRemove);
+        cardsInHand.Remove(cardToRemove);
         UpdateCards();
     }
+    public void AddCardToDeck(GameObject cardToAdd)
+    {
+        cardsInDeck.Add(cardToAdd);
+    }
+    public void RemoveCardFromDeck(GameObject cardToAdd)
+    {
+        cardsInDeck.Remove(cardToAdd);
+    }
+
+
 }
