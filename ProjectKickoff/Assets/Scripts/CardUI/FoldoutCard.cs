@@ -13,6 +13,7 @@ public class FoldoutCard : MonoBehaviour
     bool isFoldingOut;
     bool isFoldingIn;
     bool hasEnteredHover;
+    public static bool isCurrentlyPlacingCard;
     private void Awake()
     {
         originalScale = transform.localScale;
@@ -22,6 +23,8 @@ public class FoldoutCard : MonoBehaviour
     /// </summary>
     public void Foldout()
     {
+        if (isCurrentlyPlacingCard) return;
+
         if (!isFoldingOut && !isFoldingIn && !hasEnteredHover)
         {
             hasEnteredHover = true;
@@ -59,6 +62,8 @@ public class FoldoutCard : MonoBehaviour
     /// </summary>
     public void Foldin()
     {
+        if (isCurrentlyPlacingCard) return;
+
         if (!isFoldingIn && hasEnteredHover)
         {
             StartCoroutine(FoldinAnimation());
@@ -93,6 +98,9 @@ public class FoldoutCard : MonoBehaviour
 
     public void PickThisCard()
     {
+        if (isCurrentlyPlacingCard) return;
+
+        isCurrentlyPlacingCard = true;
         GameObject placerObj = new("CardPlacer");
         CardPlacer placer = placerObj.AddComponent<CardPlacer>();
         placer.card = GameManager.instance.currentCards[index];
