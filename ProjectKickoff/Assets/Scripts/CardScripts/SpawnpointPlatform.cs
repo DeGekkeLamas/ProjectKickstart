@@ -7,7 +7,11 @@ public class SpawnpointPlatform : CardBase
 
     protected override void StartEffect()
     {
-        currentCheckpoint = FindAnyObjectByType<PlayerController>().transform.position;
+        PlayerController Player = FindAnyObjectByType<PlayerController>();
+        if (Player != null)
+        {
+            currentCheckpoint = Player.transform.position;
+        }
     }
     protected override void StayEffect(Collision2D collision)
     {
