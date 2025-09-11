@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationRange: {x: -30, y: 30}
-  PlacementRange: {x: -45, y: 45}
+  PlacementRange: {x: -60, y: 60}
   curveHeight: 20
   currentCards:
   - {fileID: 0}

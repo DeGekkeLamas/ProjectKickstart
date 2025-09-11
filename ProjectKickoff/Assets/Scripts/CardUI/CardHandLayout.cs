@@ -39,7 +39,7 @@ public class CardHandLayout : MonoBehaviour
             currentCards[i].transform.eulerAngles = new(0,0, Mathf.Lerp(rotationRange.x,rotationRange.y, inverseI));
             currentCards[i].transform.position = this.transform.position + 
                 new Vector3(Mathf.Lerp(PlacementRange.x, PlacementRange.y, 1-inverseI), 
-                Mathf.Sin(inverseI * Mathf.PI) * curveHeight, 0) / canvasScale;
+                Mathf.Sin(inverseI * Mathf.PI) * curveHeight, 0) * canvasScale;
             // Color used for old debug, no longer needed mostly
             //currentCards[i].GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, inverseI);
 
