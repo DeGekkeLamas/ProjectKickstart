@@ -6,9 +6,9 @@ public class CardPickerUI : MonoBehaviour
     public CardPickerManager manager;
     public GameObject prefabReference;
 
-    public void OnMouseDown()
+    public void CollectCard()
     {
         print("collectingCard");
-        manager.CollectCard(transform.parent.gameObject, prefabReference);
+        manager.CollectCard(gameObject, prefabReference);
     }
 }

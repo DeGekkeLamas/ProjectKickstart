@@ -567,12 +567,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f73d3cdc0004084f8ce09cb17617f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCards:
-  - {fileID: 4669745024024638310, guid: 71d6dfcc5ebc5d541be4790e6de5be96, type: 3}
+  cardsInHand:
   - {fileID: 4669745024024638310, guid: e6e26270d4bcbe4438a4c64ee0a9852b, type: 3}
+  - {fileID: 4669745024024638310, guid: afe54775d0cc1d14f923669d7417a9e8, type: 3}
+  - {fileID: 4669745024024638310, guid: 65cc0c98fafbdda459fca86d3ded4fbb, type: 3}
   - {fileID: 4669745024024638310, guid: 196a413455845c648859818988ab40d7, type: 3}
-  - {fileID: 4669745024024638310, guid: 0259b5d4d9c3697469cf0e0215237a5a, type: 3}
-  - {fileID: 4669745024024638310, guid: 6b9715858fa32284488a4ed2d3f4ec71, type: 3}
+  cardsInDeck: []
   cardUI: {fileID: 2046484604}
   cardElement: {fileID: 1850075031555201614, guid: fa9115d3a09ce8240838f3af4160808b, type: 3}
 --- !u!4 &422604401

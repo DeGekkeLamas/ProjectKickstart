@@ -27,10 +27,11 @@ public class GameplayLoopManager : MonoBehaviour
         return currentState;
     }
 
-    public void SetState(GameState newState)
+    public void SetState(int newState)
     {
-        currentState = newState;
-        InitiateState(newState);
+        
+        currentState = (GameState)newState;
+        InitiateState((GameState)newState);
     }
 
     private void InitiateState(GameState newState)
@@ -44,6 +45,12 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.startingDeck:
             break;
             case GameState.placingCards:
+                GameManager gamemanager = GameManager.instance;
+                foreach (var card in gamemanager.cardsInDeck)
+                {
+                    gamemanager.AddCardToHand(card);
+                }
+                
             break;
             case GameState.platforming:
             break;

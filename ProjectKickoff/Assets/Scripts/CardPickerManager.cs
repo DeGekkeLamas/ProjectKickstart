@@ -14,7 +14,7 @@ public class CardPickerManager : MonoBehaviour
     public int cardsCount;
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
-    public List<GameObject> collectdCards = new();
+    
     
 
     private GameObject GenerateRandomCard()
@@ -30,16 +30,15 @@ public class CardPickerManager : MonoBehaviour
         {
             GameObject prefabreference = GenerateRandomCard();
             GameObject cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
-            GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, cardObject.transform);
+            Sprite usedSprite = cardObject.GetComponent<SpriteRenderer>().sprite;
+            DestroyImmediate(cardObject);
+            GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform);
+            cardSelectionObject.transform.localScale = Vector3.one * 200;
+            cardSelectionObject.GetComponent<UnityEngine.UI.Image>().sprite = usedSprite;
             CardPickerUI pickerUIScript = cardSelectionObject.GetComponent<CardPickerUI>();
             pickerUIScript.manager = this;
             pickerUIScript.prefabReference = prefabreference;
-            cardObject.GetComponent<BoxCollider2D>().enabled = false;
-            CardBase cardBase = cardObject.GetComponent<CardBase>();
-            if (cardBase) cardBase.enabled = false;
-            Rigidbody2D rigidBody = cardObject.GetComponent<Rigidbody2D>();
-            if (rigidBody) DestroyImmediate(rigidBody);
-            selectedCards.Add(cardObject);
+
             selectedCards.Add(cardSelectionObject);
         }
     }
