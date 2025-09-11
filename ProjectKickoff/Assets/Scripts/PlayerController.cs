@@ -25,9 +25,23 @@ public class PlayerController : MonoBehaviour
         
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            DoJump();
+            if (GroundedCheck())
+            {
+                DoJump();
+            }
+            // Walljump
+            else
+            {
+                RaycastHit2D hit;
+                if (movement > 0) hit = TerrainCheckRight();
+                else hit = TerrainCheckLeft();
+                if (hit.collider != null)
+                {
+                    WallJump(hit.normal);
+                }
+            }
         }
     }
 
@@ -64,11 +78,11 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit;
         if (movement.x > 0)
         {
-            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+            hit = TerrainCheckRight();
         }
         else
         {
-            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
+            hit = TerrainCheckLeft();
         }
         if (hit)
         {
@@ -78,5 +92,23 @@ public class PlayerController : MonoBehaviour
         
         transform.Translate(movement);
         return true;
+    }
+
+    RaycastHit2D TerrainCheckRight()
+    {
+        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
+        return Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+    }
+
+    RaycastHit2D TerrainCheckLeft()
+    {
+        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
+        return Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
+    }
+
+    void WallJump(Vector3 direction)
+    {
+        _rigidbody.AddForce(direction.normalized * jumpForce);
+        DoJump();
     }
 }

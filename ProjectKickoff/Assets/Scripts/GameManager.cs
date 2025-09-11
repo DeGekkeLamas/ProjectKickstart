@@ -33,11 +33,18 @@ public class GameManager : MonoBehaviour
         cardUI.SetCardPositions();
     }
 
+    /// <summary>
+    /// Add a card and update the card UI display
+    /// </summary>
     public void AddCard(GameObject cardToAdd)
     {
         currentCards.Add(cardToAdd);
         UpdateCards();
     }
+
+    /// <summary>
+    /// Remove a card and update the card UI display
+    /// </summary>
     public void RemoveCard(GameObject cardToRemove)
     {
         currentCards.Remove(cardToRemove);

@@ -18,10 +18,6 @@ public class CardHandLayout : MonoBehaviour
         rotationRange = new(rotationRange.x, Mathf.Max(rotationRange.x, rotationRange.y));
         PlacementRange = new(PlacementRange.x, Mathf.Max(PlacementRange.x, PlacementRange.y));
     }
-    //private void Awake()
-    //{
-    //    SetCardPositions();
-    //}
 
     [Button]
     public void SetCardPositions()
