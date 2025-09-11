@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     Collider2D _collider;
     Rigidbody2D _rigidbody;
     public static PlayerController instance;
+    Vector3 spawnPoint;
 
     public float moveSpeed = 1;
     public float sprintMultiplier = 2;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
         instance = this;
         _collider = GetComponent<Collider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        spawnPoint = transform.position;
     }
 
     void Update()
@@ -45,6 +48,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        // Check for death
+        if (this.transform.position.y < -100) Death();
     }
 
     bool GroundedCheck()
@@ -111,5 +117,11 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.AddForce(jumpForce * wallJumpIntensity * direction.normalized);
         _rigidbody.AddForce(jumpForce * wallJumpIntensity * Vector3.up);
+    }
+
+    public void Death()
+    {
+        transform.position = spawnPoint;
+        Debug.Log("You died lmao");
     }
 }
