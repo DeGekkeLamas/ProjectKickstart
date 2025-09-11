@@ -35,7 +35,7 @@ public class CardHandLayout : MonoBehaviour
         for (int i = 0; i < currentCards.Count; i++)
         {
             // Place card
-            float inverseI = 1f/(currentCards.Count-1) * i;
+            float inverseI = 1f/Mathf.Max(1,currentCards.Count-1) * i;
             currentCards[i].transform.eulerAngles = new(0,0, Mathf.Lerp(rotationRange.x,rotationRange.y, inverseI));
             currentCards[i].transform.position = this.transform.position + 
                 new Vector3(Mathf.Lerp(PlacementRange.x, PlacementRange.y, 1-inverseI), 
