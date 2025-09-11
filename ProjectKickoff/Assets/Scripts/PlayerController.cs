@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1;
     public float sprintMultiplier = 2;
     public float jumpForce = 1;
+    [Tooltip("Multiplies with jumpforce, set to 1 to be the same as jumpforce")]
+    public float wallJumpIntensity = .5f;
     void Awake()
     {
         instance = this;
@@ -21,13 +23,27 @@ public class PlayerController : MonoBehaviour
         // Walk
         float movement = Input.GetAxis("Horizontal");
         float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
-        DoMove(Vector2.right * movement * usedMoveSpeed * Time.deltaTime);
+        DoMove(movement * usedMoveSpeed * Time.deltaTime * Vector2.right);
         
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && GroundedCheck())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            DoJump();
+            if (GroundedCheck())
+            {
+                DoJump();
+            }
+            // Walljump
+            else
+            {
+                RaycastHit2D hit;
+                if (movement > 0) hit = TerrainCheckRight();
+                else hit = TerrainCheckLeft();
+                if (hit.collider != null)
+                {
+                    WallJump(hit.normal);
+                }
+            }
         }
     }
 
@@ -60,23 +76,40 @@ public class PlayerController : MonoBehaviour
     public bool DoMove(Vector2 movement)//tests horizontalMovement
     {
         if (movement == Vector2.zero) return false;
-        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
         RaycastHit2D hit;
         if (movement.x > 0)
         {
-            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+            hit = TerrainCheckRight();
         }
         else
         {
-            hit = Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
+            hit = TerrainCheckLeft();
         }
         if (hit)
         {
-            movement = movement * hit.fraction;
+            movement *= hit.fraction;
         }
 
         
         transform.Translate(movement);
         return true;
+    }
+
+    RaycastHit2D TerrainCheckRight()
+    {
+        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
+        return Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.right, .1f, ~LayerMask.GetMask("Player"));
+    }
+
+    RaycastHit2D TerrainCheckLeft()
+    {
+        Vector2 playerSize = gameObject.GetComponent<BoxCollider2D>().size;
+        return Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
+    }
+
+    void WallJump(Vector3 direction)
+    {
+        _rigidbody.AddForce(jumpForce * wallJumpIntensity * direction.normalized);
+        _rigidbody.AddForce(jumpForce * wallJumpIntensity * Vector3.up);
     }
 }

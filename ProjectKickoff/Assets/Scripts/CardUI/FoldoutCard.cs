@@ -18,6 +18,7 @@ public class FoldoutCard : MonoBehaviour
     {
         originalScale = transform.localScale;
     }
+
     /// <summary>
     /// Folds the card from your hand out to be better visible
     /// </summary>
@@ -57,6 +58,7 @@ public class FoldoutCard : MonoBehaviour
         }
         isFoldingOut = false;
     }
+
     /// <summary>
     /// Folds card back into your hand
     /// </summary>
@@ -96,6 +98,9 @@ public class FoldoutCard : MonoBehaviour
         hasEnteredHover = false;
     }
 
+    /// <summary>
+    /// Remove this card from the hand to make it placable in the level
+    /// </summary>
     public void PickThisCard()
     {
         if (isCurrentlyPlacingCard) return;
