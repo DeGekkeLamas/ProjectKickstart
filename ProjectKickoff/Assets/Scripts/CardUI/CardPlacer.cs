@@ -42,6 +42,7 @@ public class CardPlacer : MonoBehaviour
             else // Place card
             {
                 Instantiate(card, objectBounds.center, Quaternion.identity, cardContainer.transform);
+                FoldoutCard.isCurrentlyPlacingCard = false;
                 Debug.Log("Placed card");
                 Destroy(this.gameObject);
             }
