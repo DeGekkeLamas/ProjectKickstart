@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CardPickerManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class CardPickerManager : MonoBehaviour
     public int cardsCount;
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
+    public List<GameObject> collectdCards = new();
+    public GameManager gameManager;
     
 
     private GameObject GenerateRandomCard()
@@ -26,8 +29,19 @@ public class CardPickerManager : MonoBehaviour
         ClearCards();
         for (int i = 0; i < cardsCount; i++)
         {
-            selectedCards.Add(Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform));
-            selectedCards.Add(Instantiate(GenerateRandomCard(), positions[i], Quaternion.identity, transform));
+            GameObject prefabreference = GenerateRandomCard();
+            GameObject cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
+            GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, cardObject.transform);
+            CardPickerUI pickerUIScript = cardSelectionObject.GetComponent<CardPickerUI>();
+            pickerUIScript.manager = this;
+            pickerUIScript.prefabReference = prefabreference;
+            cardObject.GetComponent<BoxCollider2D>().enabled = false;
+            CardBase cardBase = cardObject.GetComponent<CardBase>();
+            if (cardBase) cardBase.enabled = false;
+            Rigidbody2D rigidBody = cardObject.GetComponent<Rigidbody2D>();
+            if (rigidBody) DestroyImmediate(rigidBody);
+            selectedCards.Add(cardObject);
+            selectedCards.Add(cardSelectionObject);
         }
     }
 
@@ -39,5 +53,12 @@ public class CardPickerManager : MonoBehaviour
             DestroyImmediate(item);
         }
         selectedCards.Clear();
+    }
+
+    public void CollectCard(GameObject instance, GameObject prefabReference)
+    {
+        instance.gameObject.SetActive(false);
+        
+        gameManager.AddCard(prefabReference);
     }
 }
