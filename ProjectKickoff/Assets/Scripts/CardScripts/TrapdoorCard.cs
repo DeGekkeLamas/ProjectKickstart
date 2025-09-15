@@ -5,7 +5,7 @@ public class TrapdoorCard : CardBase
 {
     Collider2D thisCardsCollider;
     public float lifeSpan = 2;
-    private float durationLeft;
+    public float durationLeft;
     private void Awake()
     {
         thisCardsCollider = GetComponent<Collider2D>();
@@ -17,6 +17,7 @@ public class TrapdoorCard : CardBase
     
     protected override void StayEffect(Collision2D collision)
     {
+        durationLeft -= Time.deltaTime;
         if (durationLeft < 0) thisCardsCollider.enabled = false;
     }
     protected override void ExitEffect(Collision2D collision)
