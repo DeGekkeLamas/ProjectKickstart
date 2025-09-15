@@ -5,6 +5,12 @@ using UnityEngine;
 public class GameplayLoopManager : MonoBehaviour
 {
     public static GameplayLoopManager instance;
+    public GameObject buttonDonePicking;
+    public GameObject buttonDonePlacing;
+    public GameObject player;
+    public GameObject cameraPanPrefab;
+    private GameObject theCameraPrefab;
+    public GameObject defaultCamera;
     void Awake()
     {
         instance = this;
@@ -50,10 +56,16 @@ public class GameplayLoopManager : MonoBehaviour
                 {
                     gamemanager.AddCardToHand(card);
                 }
-                
-            break;
+                buttonDonePicking.SetActive(false);
+                buttonDonePlacing.SetActive(true);
+                theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
+                defaultCamera.SetActive(false);
+                break;
             case GameState.platforming:
-            break;
+                Destroy(theCameraPrefab);
+                defaultCamera.SetActive(true);
+                player.SetActive(true);
+                break;
             case GameState.choosingCards:
             break;
             case GameState.shop:
