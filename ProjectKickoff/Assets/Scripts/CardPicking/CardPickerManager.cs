@@ -1,10 +1,6 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using NaughtyAttributes;
-
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CardPickerManager : MonoBehaviour
@@ -55,7 +51,7 @@ public class CardPickerManager : MonoBehaviour
 
     public void CollectCard(GameObject instance, CardBase prefabReference)
     {
-        instance.gameObject.SetActive(false);
+        Destroy(instance);
         GameManager.instance.AddCardToDeck(prefabReference);
     }
 }
