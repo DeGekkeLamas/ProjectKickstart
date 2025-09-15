@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<GameObject> cardsInHand = new();
-    public List<GameObject> cardsInDeck = new();
+    public List<CardBase> cardsInHand = new();
+    public List<CardBase> cardsInDeck = new();
     public static GameManager instance;
 
     public CardHandLayout cardUI;
@@ -34,21 +34,21 @@ public class GameManager : MonoBehaviour
         cardUI.SetCardPositions();
     }
 
-    public void AddCardToHand(GameObject cardToAdd)
+    public void AddCardToHand(CardBase cardToAdd)
     {
         cardsInHand.Add(cardToAdd);
         UpdateCards();
     }
-    public void RemoveCardFromHand(GameObject cardToRemove)
+    public void RemoveCardFromHand(CardBase cardToRemove)
     {
         cardsInHand.Remove(cardToRemove);
         UpdateCards();
     }
-    public void AddCardToDeck(GameObject cardToAdd)
+    public void AddCardToDeck(CardBase cardToAdd)
     {
         cardsInDeck.Add(cardToAdd);
     }
-    public void RemoveCardFromDeck(GameObject cardToAdd)
+    public void RemoveCardFromDeck(CardBase cardToAdd)
     {
         cardsInDeck.Remove(cardToAdd);
     }

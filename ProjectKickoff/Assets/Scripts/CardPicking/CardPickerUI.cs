@@ -4,7 +4,7 @@ using UnityEngine;
 public class CardPickerUI : MonoBehaviour
 {
     public CardPickerManager manager;
-    public GameObject prefabReference;
+    public CardBase prefabReference;
 
     public void CollectCard()
     {

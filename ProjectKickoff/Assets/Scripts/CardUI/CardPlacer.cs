@@ -5,7 +5,7 @@ public class CardPlacer : MonoBehaviour
     public Color spotAvailableColor = Color.green;
     public Color spotUnavailableColor = Color.red;
 
-    public GameObject card;
+    public CardBase card;
     static GameObject cardContainer;
     new SpriteRenderer renderer;
 
@@ -13,7 +13,7 @@ public class CardPlacer : MonoBehaviour
     private void Start()
     {
         if (cardContainer == null) cardContainer = new GameObject("CardContainer");
-        GameObject cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
+        CardBase cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
         Destroy(cardObject.GetComponent<Collider2D>());
         Destroy(cardObject.GetComponent<CardBase>());
         renderer = cardObject.GetComponent<SpriteRenderer>();

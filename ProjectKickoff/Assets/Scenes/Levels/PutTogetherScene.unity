@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1532873815}
-  prefabReference: {fileID: 4669745024024638310, guid: 0811c94aac7945a499b4570dd6b8bbf4, type: 3}
+  prefabReference: {fileID: 6961336733053783128, guid: 0811c94aac7945a499b4570dd6b8bbf4, type: 3}
 --- !u!224 &411969966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1532873815}
-  prefabReference: {fileID: 7514125295759506606, guid: a306e241504f8e947a0dc7b5c483896f, type: 3}
+  prefabReference: {fileID: 8274367220920949852, guid: a306e241504f8e947a0dc7b5c483896f, type: 3}
 --- !u!1 &1440702131
 GameObject:
   m_ObjectHideFlags: 0
@@ -3453,7 +3453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1532873815}
-  prefabReference: {fileID: 4669745024024638310, guid: 65cc0c98fafbdda459fca86d3ded4fbb, type: 3}
+  prefabReference: {fileID: 8874371468956297172, guid: 65cc0c98fafbdda459fca86d3ded4fbb, type: 3}
 --- !u!224 &1715212739
 RectTransform:
   m_ObjectHideFlags: 0

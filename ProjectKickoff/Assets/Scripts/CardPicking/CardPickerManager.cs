@@ -10,14 +10,14 @@ using UnityEngine.UI;
 public class CardPickerManager : MonoBehaviour
 {
     public GameObject CardUIPickerPrefab;
-    public List<GameObject> allCardPrefabs = new();
+    public List<CardBase> allCardPrefabs = new();
     public int cardsCount;
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
     
     
 
-    private GameObject GenerateRandomCard()
+    private CardBase GenerateRandomCard()
     {
         return allCardPrefabs[Random.Range(0, allCardPrefabs.Count)];
     }
@@ -28,8 +28,8 @@ public class CardPickerManager : MonoBehaviour
         ClearCards();
         for (int i = 0; i < cardsCount; i++)
         {
-            GameObject prefabreference = GenerateRandomCard();
-            GameObject cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
+            CardBase prefabreference = GenerateRandomCard();
+            CardBase cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
             Sprite usedSprite = cardObject.GetComponent<SpriteRenderer>().sprite;
             DestroyImmediate(cardObject);
             GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform);
@@ -53,7 +53,7 @@ public class CardPickerManager : MonoBehaviour
         selectedCards.Clear();
     }
 
-    public void CollectCard(GameObject instance, GameObject prefabReference)
+    public void CollectCard(GameObject instance, CardBase prefabReference)
     {
         instance.gameObject.SetActive(false);
         GameManager.instance.AddCardToDeck(prefabReference);
