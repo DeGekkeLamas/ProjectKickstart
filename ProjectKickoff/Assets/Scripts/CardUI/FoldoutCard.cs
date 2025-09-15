@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FoldoutCard : MonoBehaviour
@@ -14,8 +15,10 @@ public class FoldoutCard : MonoBehaviour
     bool isFoldingIn;
     bool hasEnteredHover;
     public static bool isCurrentlyPlacingCard;
+    CardHandLayout cardSet;
     private void Awake()
     {
+        cardSet = this.transform.parent.GetComponent<CardHandLayout>();
         originalScale = transform.localScale;
     }
 
@@ -56,6 +59,7 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+        this.transform.SetSiblingIndex( cardSet.currentCards.Count-1 );
         isFoldingOut = false;
     }
 
@@ -94,6 +98,8 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+        cardSet.CorrectHierarchy();
+
         isFoldingIn = false;
         hasEnteredHover = false;
     }

@@ -40,6 +40,17 @@ public class CardHandLayout : MonoBehaviour
             //currentCards[i].GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, inverseI);
 
             // Correct hierarchy
+            CorrectHierarchy();
+        }
+    }
+
+    /// <summary>
+    /// Corrects the hierarchy order so cards are shown over each other correctly
+    /// </summary>
+    public void CorrectHierarchy()
+    {
+        for (int i = 0; i < currentCards.Count; i++)
+        {
             currentCards[i].transform.SetSiblingIndex(0);
         }
     }
