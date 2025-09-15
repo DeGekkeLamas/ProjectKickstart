@@ -1,9 +1,16 @@
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using NaughtyAttributes;
 
-public abstract class CardBase : MonoBehaviour
+/// <summary>
+/// this is a base class for card effects, also place this on cards without script based effects, at this is used for their card data too
+/// </summary>
+public class CardBase : MonoBehaviour
 {
-    //this is a base class for card effects
+    [InfoBox("The sprite on this script is used for the UI card in hand, the sprite on the prefabs sprite renderer is used for the placed platform")]
+
+    [Tooltip("The sprite used for the card in hand UI")]
+    public Sprite cardSprite;
+
     private void Start() { StartEffect(); }
     private void Update() { UpdateEffect(); }
 
