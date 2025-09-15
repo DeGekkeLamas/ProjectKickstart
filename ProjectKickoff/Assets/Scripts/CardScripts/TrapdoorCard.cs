@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class TrapdoorCard : CardBase
 {
-    public Collider2D thisCardsCollider;
-    public float delay = 2;
+    Collider2D thisCardsCollider;
+    public float lifeSpan = 2;
+    private float durationLeft;
+    private void Awake()
+    {
+        thisCardsCollider = GetComponent<Collider2D>();
+    }
     protected override void EnterEffect(Collision2D collision)
     {
-        StartCoroutine(BreakPlatform());
+        durationLeft = lifeSpan;
+    }
+    
+    protected override void StayEffect(Collision2D collision)
+    {
+        if (durationLeft < 0) thisCardsCollider.enabled = false;
+    }
+    protected override void ExitEffect(Collision2D collision)
+    {
+        StartCoroutine(ResetTrapdoor());
     }
 
-    IEnumerator BreakPlatform()
+    IEnumerator ResetTrapdoor()
     {
-
-        yield return new WaitForSeconds(delay);
-        thisCardsCollider.enabled = false;
+        yield return new WaitForSeconds(1);
+        thisCardsCollider.enabled = true;
     }
 }
