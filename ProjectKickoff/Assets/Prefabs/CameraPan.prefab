@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5093156954925647578}
   - component: {fileID: 1899646863399527135}
   - component: {fileID: 6465775225209028660}
+  - component: {fileID: 9204456937736287150}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -137,6 +138,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &9204456937736287150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800060977757728086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbba53169b652b041b75af540077bc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7586653988552305677
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,11 +195,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ae91e8ddca0ab4682fd6e1217df72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelBounds:
-    x: -50
-    y: -50
-    width: 100
-    height: 100
-  displayLevelbounds: 0
   moveSpeed: 10
   SprintMulti: 3

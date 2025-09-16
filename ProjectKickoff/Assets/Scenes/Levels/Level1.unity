@@ -119,6 +119,29 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1613925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1025997237816890763, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+  m_PrefabInstance: {fileID: 6346292019230318430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1613927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2375e07ca24906d4ba0a86035fff08dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelBounds:
+    x: -8
+    y: -1
+    width: 54
+    height: 37
+  displayLevelbounds: 1
 --- !u!4 &394682746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4301987011132144472, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
@@ -2949,6 +2972,7 @@ GameObject:
   - component: {fileID: 1783536801}
   - component: {fileID: 1783536800}
   - component: {fileID: 1783536803}
+  - component: {fileID: 1783536804}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3074,6 +3098,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1783536804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783536799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbba53169b652b041b75af540077bc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1839354501 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 908997234093109374, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
@@ -38129,10 +38165,6 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7361108629932354454, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -38146,6 +38178,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1772370672}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1025997237816890763, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1613927}
     - targetCorrespondingSourceObject: {fileID: 908997234093109374, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1839354509}
