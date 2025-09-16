@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CardHandLayout cardUI;
     public FoldoutCard cardElement;
 
+    public int CollectedCoins;
     void Awake()
     {
         instance = this;
