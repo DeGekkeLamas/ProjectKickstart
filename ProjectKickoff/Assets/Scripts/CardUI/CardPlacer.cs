@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 public class CardPlacer : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class CardPlacer : MonoBehaviour
     public CardBase card;
     public static GameObject cardContainer;
     new SpriteRenderer renderer;
+    private Vector3 cardPosition;
+    private float cardRotation;
+    private bool cardPosSet;
 
     private void Start()
     {
@@ -18,6 +22,9 @@ public class CardPlacer : MonoBehaviour
         Destroy(cardObject.GetComponent<Collider2D>());
         Destroy(cardObject.GetComponent<CardBase>());
         renderer = cardObject.GetComponent<SpriteRenderer>();
+        cardRotation = 0;
+        cardPosition = Vector3.zero;
+        cardPosSet = false;
     }
 
     void Update()
@@ -25,28 +32,70 @@ public class CardPlacer : MonoBehaviour
         // Set position
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0;
-        transform.position = mouseWorldPos;
+        if (!cardPosSet) transform.position = mouseWorldPos;
+        
+
+        // Set rotation
+        if (cardPosSet)
+        {
+            if (Vector3.Distance(cardPosition, mouseWorldPos) > 1f)
+            {
+                Vector2 delta = (Vector2)mouseWorldPos - (Vector2)cardPosition;
+                float angleRad = Mathf.Atan2(delta.y, delta.x);
+                cardRotation = angleRad * Mathf.Rad2Deg;
+            }
+            else cardRotation = 0;
+        }
+        transform.rotation = Quaternion.AngleAxis(cardRotation, Vector3.forward);
 
         // Check if valid spot on click
         Bounds objectBounds = this.transform.GetChild(0).GetComponent<Renderer>().bounds;
-        RaycastHit2D pointOccupied = Physics2D.BoxCast(objectBounds.center, objectBounds.size, 0, Vector2.zero);
+        RaycastHit2D pointOccupied = Physics2D.BoxCast(objectBounds.center, objectBounds.size, cardRotation, Vector2.zero);
         bool hitSomething = pointOccupied.collider != null;
         DebugExtension.DebugBounds(objectBounds, hitSomething ? Color.green : Color.red);
         renderer.color = hitSomething ? spotUnavailableColor : spotAvailableColor;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !cardPosSet)
         {
             if (hitSomething)
             {
                 DebugExtension.DebugArrow(objectBounds.center, pointOccupied.point - (Vector2)objectBounds.center, Color.red, 1);
             }
-            else // Place card
+            else // Save position
             {
-                Instantiate(card, objectBounds.center, Quaternion.identity, cardContainer.transform);
-                FoldoutCard.isCurrentlyPlacingCard = false;
-                Debug.Log("Placed card");
-                Destroy(this.gameObject);
+                cardPosition = objectBounds.center;
+                cardPosSet = true;
             }
         }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (cardPosSet)
+            {
+                if (hitSomething)
+                {
+                    cardRotation = 0;
+                    cardPosition = Vector3.zero;
+                    cardPosSet = false;
+                }
+                else PlaceCard();
+            }
+        }
+        if (Input.GetMouseButtonDown(1) && cardPosSet)
+        {
+            cardRotation = 0;
+            cardPosition = Vector3.zero;
+            cardPosSet = false;
+        }
+    }
+
+    private void PlaceCard()
+    {
+        
+        Instantiate(card, cardPosition, transform.rotation, cardContainer.transform);
+        FoldoutCard.isCurrentlyPlacingCard = false;
+        Debug.Log("Placed card");
+        cardPosition = Vector3.zero;
+        cardPosSet = false;
+        Destroy(this.gameObject);
     }
 }
