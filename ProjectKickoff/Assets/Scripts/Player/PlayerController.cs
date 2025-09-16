@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (this.transform.position.y < -100) Death();
     }
 
-    bool GroundedCheck()
+    public bool GroundedCheck()
     {
         // Collision testing
         RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
@@ -113,6 +113,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.BoxCast(transform.position, playerSize, 0, Vector3.left, .1f, ~LayerMask.GetMask("Player"));
     }
 
+    public bool IsAgainstWall()
+    {
+        if (TerrainCheckLeft().collider != null) return true;
+        if (TerrainCheckRight().collider != null) return true;
+        return false;
+    }
     void WallJump(Vector3 direction)
     {
         _rigidbody.AddForce(jumpForce * wallJumpIntensity * direction.normalized);
