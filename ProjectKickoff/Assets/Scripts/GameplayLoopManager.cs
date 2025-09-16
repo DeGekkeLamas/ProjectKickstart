@@ -75,7 +75,6 @@ public class GameplayLoopManager : MonoBehaviour
                 }
                 buttonDonePlacing.SetActive(false);
                 Destroy(theCameraPrefab);
-                defaultCamera.SetActive(true);
                 player.SetActive(true);
                 break;
             case GameState.choosingCards:
