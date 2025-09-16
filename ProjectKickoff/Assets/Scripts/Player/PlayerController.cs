@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     Collider2D _collider;
     Rigidbody2D _rigidbody;
     public static PlayerController instance;
-    Vector3 spawnPoint;
+    public Vector3 spawnPoint;
 
     public float moveSpeed = 1;
     public float sprintMultiplier = 2;

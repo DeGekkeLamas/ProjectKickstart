@@ -27,7 +27,14 @@ public class CardPickerManager : MonoBehaviour
             CardBase prefabreference = GenerateRandomCard();
             CardBase cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
             Sprite usedSprite = cardObject.GetComponent<SpriteRenderer>().sprite;
-            DestroyImmediate(cardObject);
+            if (Application.isPlaying)
+            {
+                Destroy(cardObject.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(cardObject.gameObject);
+            }
             GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform);
             cardSelectionObject.transform.localScale = Vector3.one * 200;
             cardSelectionObject.GetComponent<UnityEngine.UI.Image>().sprite = usedSprite;

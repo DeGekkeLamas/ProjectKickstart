@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CardPlacer : MonoBehaviour
 {
@@ -6,9 +8,8 @@ public class CardPlacer : MonoBehaviour
     public Color spotUnavailableColor = Color.red;
 
     public CardBase card;
-    static GameObject cardContainer;
+    public static GameObject cardContainer;
     new SpriteRenderer renderer;
-
 
     private void Start()
     {
