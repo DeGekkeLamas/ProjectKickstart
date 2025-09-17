@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
     {
         // Collision testing
         RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
-            this.transform.lossyScale * .5f, 0, Vector3.down, .1f, ~LayerMask.GetMask("Player"));
+            this.transform.lossyScale * .25f, 0, Vector3.down, .05f, ~LayerMask.GetMask("Player"));
         bool hitSomething = hit.collider != null;
-        bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) < 0;
+        bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) <= 0;
 
         // Debug
         Bounds bounds = new(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f)
