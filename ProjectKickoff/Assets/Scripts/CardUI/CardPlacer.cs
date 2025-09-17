@@ -91,7 +91,8 @@ public class CardPlacer : MonoBehaviour
     private void PlaceCard()
     {
         
-        Instantiate(card, cardPosition, transform.rotation, cardContainer.transform);
+        CardBase placedCard = Instantiate(card, cardPosition, transform.rotation, cardContainer.transform);
+        placedCard.originalPrefab = card;
         FoldoutCard.isCurrentlyPlacingCard = false;
         Debug.Log("Placed card");
         cardPosition = Vector3.zero;
