@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c145c8ed2a8613541893ad423791f15a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 1805ae8f3d7cd8f43b32f68e38311a72, type: 3}
+  cardSprite: {fileID: 21300000, guid: e92260081e6b52d41a9464f7f1093ad7, type: 3}
   DashDirection: {x: 3, y: 3, z: 0}
