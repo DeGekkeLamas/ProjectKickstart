@@ -33,7 +33,7 @@ public class FoldoutCard : MonoBehaviour
         {
             hasEnteredHover = true;
             StartCoroutine(FoldoutAnimation());
-            Debug.Log("Folded out card");
+            //Debug.Log("Folded out card");
         }
     }
     IEnumerator FoldoutAnimation()
@@ -73,7 +73,7 @@ public class FoldoutCard : MonoBehaviour
         if (!isFoldingIn && hasEnteredHover)
         {
             StartCoroutine(FoldinAnimation());
-            Debug.Log("Folded in card");
+            //Debug.Log("Folded in card");
         }
     }
     IEnumerator FoldinAnimation()
