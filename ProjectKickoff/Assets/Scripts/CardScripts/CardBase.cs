@@ -6,6 +6,7 @@ using NaughtyAttributes;
 /// </summary>
 public class CardBase : MonoBehaviour
 {
+    [HideInInspector] public CardBase originalPrefab;
     [InfoBox("The sprite on this script is used for the UI card in hand, the sprite on the prefabs sprite renderer is used for the placed platform")]
 
     [Tooltip("The sprite used for the card in hand UI")]
@@ -27,5 +28,14 @@ public class CardBase : MonoBehaviour
     protected virtual void ExitEffect(Collision2D collision) { }
     protected virtual void StayEffect(Collision2D collision) { }
 
-    
+    /// <summary>
+    /// Remove card when clicked
+    /// </summary>
+    private void OnMouseDown()
+    {
+        if (GameplayLoopManager.instance.currentState != GameState.placingCards) return;
+
+        GameManager.instance.AddCardToHand(originalPrefab);
+        Destroy(this.gameObject);
+    }
 }

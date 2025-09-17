@@ -4,6 +4,17 @@ using System.Linq.Expressions;
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum GameState
+{
+    startGame,
+    turorial,
+    startingDeck,
+    placingCards,
+    platforming,
+    choosingCards,
+    shop,
+}
+
 public class GameplayLoopManager : MonoBehaviour
 {
     public static GameplayLoopManager instance;
@@ -17,16 +28,6 @@ public class GameplayLoopManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-    }
-    public enum GameState
-    {
-        startGame,
-        turorial,
-        startingDeck,
-        placingCards,
-        platforming,
-        choosingCards,
-        shop,
     }
 
     public GameState currentState;
