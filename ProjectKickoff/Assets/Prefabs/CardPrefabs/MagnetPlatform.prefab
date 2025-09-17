@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cad337b8310a1a41930e978af8c8d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 40bb000e7fd29094d9bc51c5373cbf60, type: 3}
+  cardSprite: {fileID: 21300000, guid: 51f99be047611b3429cc360db26bd24c, type: 3}
   gravity: 10
