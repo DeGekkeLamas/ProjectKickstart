@@ -97,6 +97,7 @@ public class CardPlacer : MonoBehaviour
         Debug.Log("Placed card");
         cardPosition = Vector3.zero;
         cardPosSet = false;
+        GameplayLoopManager.instance.cardPlacers.Remove(this);
         Destroy(this.gameObject);
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class FoldoutCard : MonoBehaviour
 {
@@ -114,6 +116,7 @@ public class FoldoutCard : MonoBehaviour
         isCurrentlyPlacingCard = true;
         GameObject placerObj = new("CardPlacer");
         CardPlacer placer = placerObj.AddComponent<CardPlacer>();
+        GameplayLoopManager.instance.cardPlacers.Add(placer);
         placer.card = GameManager.instance.cardsInHand[index];
         RemoveThisCard();
     }

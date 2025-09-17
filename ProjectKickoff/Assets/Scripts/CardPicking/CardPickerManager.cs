@@ -5,13 +5,21 @@ using UnityEngine.UI;
 
 public class CardPickerManager : MonoBehaviour
 {
+    public static CardPickerManager instance;
+    public CardPickerManager Instance;
     public GameObject CardUIPickerPrefab;
     public List<CardBase> allCardPrefabs = new();
     public int cardsCount;
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
-    
-    
+    public CardBase currentCardbase;
+
+    [Button]
+    void Awake()
+    {
+        instance = this;
+        Instance = instance;
+    }
 
     private CardBase GenerateRandomCard()
     {
@@ -21,26 +29,16 @@ public class CardPickerManager : MonoBehaviour
     [Button]
     public void SpawnCards()
     {
+        if (Application.isPlaying && GameManager.instance.CollectedCoins < 1) return;
+        if (Application.isPlaying) GameManager.instance.CollectedCoins--;
         ClearCards();
         for (int i = 0; i < cardsCount; i++)
         {
-            CardBase prefabreference = GenerateRandomCard();
-            CardBase cardObject = Instantiate(prefabreference, positions[i], Quaternion.identity, transform);
-            Sprite usedSprite = cardObject.GetComponent<SpriteRenderer>().sprite;
-            if (Application.isPlaying)
-            {
-                Destroy(cardObject.gameObject);
-            }
-            else
-            {
-                DestroyImmediate(cardObject.gameObject);
-            }
+            currentCardbase = GenerateRandomCard();
             GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform);
             cardSelectionObject.transform.localScale = Vector3.one * 200;
-            cardSelectionObject.GetComponent<UnityEngine.UI.Image>().sprite = usedSprite;
             CardPickerUI pickerUIScript = cardSelectionObject.GetComponent<CardPickerUI>();
-            pickerUIScript.manager = this;
-            pickerUIScript.prefabReference = prefabreference;
+            pickerUIScript.Initiate();
 
             selectedCards.Add(cardSelectionObject);
         }
