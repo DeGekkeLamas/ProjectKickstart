@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 40bb000e7fd29094d9bc51c5373cbf60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8881c00e137e954b84b463f9ecdad02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,13 +127,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.44}
+    oldSize: {x: 2.8, y: 1}
     newSize: {x: 1, y: 1.44}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.44}
+  m_Size: {x: 2.5, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &5272036955339726883
 MonoBehaviour:
@@ -147,5 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cad337b8310a1a41930e978af8c8d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalPrefab: {fileID: 0}
   cardSprite: {fileID: 21300000, guid: 51f99be047611b3429cc360db26bd24c, type: 3}
   gravity: 10
