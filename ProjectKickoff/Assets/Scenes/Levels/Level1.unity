@@ -38242,10 +38242,6 @@ PrefabInstance:
       propertyPath: 'selectedCards.Array.data[2]'
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8614962833003045858, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: displayLevelbounds
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
