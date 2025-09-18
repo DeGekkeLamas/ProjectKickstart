@@ -22,6 +22,7 @@ public class GameplayLoopManager : MonoBehaviour
     public GameObject buttonRerollCards;
     public GameObject buttonDonePlacing;
     public GameObject buttonMakeStartIngDeck;
+    public GameObject buttonChangePlacements;
     public GameObject player;
     public GameObject cameraPanPrefab;
     private GameObject theCameraPrefab;
@@ -79,7 +80,7 @@ public class GameplayLoopManager : MonoBehaviour
                 Destroy(theCameraPrefab);
                 break;
             case GameState.platforming:
-                
+                buttonChangePlacements.SetActive(false);
                 player.SetActive(false);
                 player.transform.position = player.GetComponent<PlayerController>().spawnPoint;
                 Transform placerTransform = CardPlacer.cardContainer.transform;
@@ -123,6 +124,7 @@ public class GameplayLoopManager : MonoBehaviour
                 break;
             case GameState.platforming:
                 player.SetActive(true);
+                buttonChangePlacements.SetActive(true);
                 break;
             case GameState.choosingCards:
                 GameManager.instance.CollectedCoins++;

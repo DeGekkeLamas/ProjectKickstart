@@ -1,9 +1,31 @@
+using System.Collections;
 using UnityEngine;
 
 public class GambaPlatform : CardBase
 {
     public CardBase[] possibleEffects;
+    ParticleSystem randomParticles;
     protected override void EnterEffect(Collision2D collision)
+    {
+        StartCoroutine(RandomizeCard());
+    }
+
+    protected override void StartEffect()
+    {
+        randomParticles = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        if (randomParticles == null) Debug.LogError($"{this.gameObject.name} is missing a particlesystem child");
+    }
+
+    IEnumerator RandomizeCard()
+    {
+        randomParticles.transform.parent = null;
+        randomParticles.Play();
+        yield return new WaitForSeconds(1);
+        SpawnNewPlatform();
+        Destroy(randomParticles.gameObject);
+    }
+
+    private void SpawnNewPlatform()
     {
         if (possibleEffects.Length < 1)
         {
@@ -11,7 +33,7 @@ public class GambaPlatform : CardBase
             return;
         }
 
-        Instantiate(possibleEffects[ Random.Range(0, possibleEffects.Length) ], this.transform.position, 
+        Instantiate(possibleEffects[Random.Range(0, possibleEffects.Length)], this.transform.position,
             this.transform.rotation, this.transform.parent);
         Destroy(this.gameObject);
     }
