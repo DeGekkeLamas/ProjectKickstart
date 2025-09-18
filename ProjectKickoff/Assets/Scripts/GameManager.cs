@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,8 @@ public class GameManager : MonoBehaviour
     public CardHandLayout cardUI;
     public FoldoutCard cardElement;
 
-    public int CollectedCoins;
+    public int collectedCoins;
+    public TMP_Text coinDisplay;
     void Awake()
     {
         instance = this;
@@ -54,5 +56,9 @@ public class GameManager : MonoBehaviour
         cardsInDeck.Remove(cardToAdd);
     }
 
-
+    private void Update()
+    {
+        //update coin display
+        coinDisplay.text = collectedCoins.ToString();
+    }
 }
