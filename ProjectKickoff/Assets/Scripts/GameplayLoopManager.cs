@@ -83,10 +83,13 @@ public class GameplayLoopManager : MonoBehaviour
                 buttonChangePlacements.SetActive(false);
                 player.SetActive(false);
                 player.transform.position = player.GetComponent<PlayerController>().spawnPoint;
-                Transform placerTransform = CardPlacer.cardContainer.transform;
-                for (int i = 0; i < placerTransform.childCount; i++)
+                if (CardPlacer.cardContainer != null)
                 {
-                    Destroy(placerTransform.GetChild(i).gameObject);
+                    Transform placerTransform = CardPlacer.cardContainer.transform;
+                    for (int i = 0; i < placerTransform.childCount; i++)
+                    {
+                        Destroy(placerTransform.GetChild(i).gameObject);
+                    }
                 }
                 break;
             case GameState.choosingCards:
