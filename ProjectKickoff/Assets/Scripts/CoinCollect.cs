@@ -4,7 +4,7 @@ public class CoinCollect : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.instance.CollectedCoins++;
+        GameManager.instance.collectedCoins++;
         Destroy(gameObject);
     }
 }

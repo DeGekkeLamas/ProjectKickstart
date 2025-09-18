@@ -29,8 +29,8 @@ public class CardPickerManager : MonoBehaviour
     [Button]
     public void SpawnCards()
     {
-        if (Application.isPlaying && GameManager.instance.CollectedCoins < 1) return;
-        if (Application.isPlaying) GameManager.instance.CollectedCoins--;
+        if (Application.isPlaying && GameManager.instance.collectedCoins < 1) return;
+        if (Application.isPlaying) GameManager.instance.collectedCoins--;
         ClearCards();
         for (int i = 0; i < cardsCount; i++)
         {
