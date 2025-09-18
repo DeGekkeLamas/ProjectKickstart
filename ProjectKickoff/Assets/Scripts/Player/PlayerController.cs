@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -56,16 +57,17 @@ public class PlayerController : MonoBehaviour
     public bool GroundedCheck()
     {
         // Collision testing
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f), 
-            this.transform.lossyScale * .25f, 0, Vector3.down, .05f, ~LayerMask.GetMask("Player"));
+        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, 
+            this.transform.lossyScale - new Vector3(this.transform.lossyScale.x * .5f, 0)
+            , 0, Vector3.down, .05f, ~LayerMask.GetMask("Player"));
         bool hitSomething = hit.collider != null;
         bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) <= 0;
 
         // Debug
-        Bounds bounds = new(this.transform.position - new Vector3(0, this.transform.lossyScale.x * .5f)
-            , this.transform.lossyScale);
-        DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red, 1);
-        DebugExtension.DebugArrow(hit.point, hit.normal, angleOutOfRange ? Color.red : Color.green, 1);
+        Bounds bounds = new(this.transform.position
+            , this.transform.lossyScale - new Vector3(this.transform.lossyScale.x * .5f, 0));
+        DebugExtension.DebugBounds(bounds, hitSomething ? Color.green : Color.red);
+        DebugExtension.DebugArrow(hit.point, hit.normal, angleOutOfRange ? Color.red : Color.green);
 
         // prevent terrain like walls from returning true
         if (angleOutOfRange) return false;
