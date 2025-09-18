@@ -1,5 +1,8 @@
 using UnityEngine;
 using NaughtyAttributes;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// this is a base class for card effects, also place this on cards without script based effects, at this is used for their card data too
@@ -38,4 +41,21 @@ public class CardBase : MonoBehaviour
         GameManager.instance.AddCardToHand(originalPrefab);
         Destroy(this.gameObject);
     }
+
+    public bool ListContainsMatchingType(List<CardBase> cardList, CardBase CardType, out CardBase match)
+    {
+        foreach (var item in cardList)
+        {
+            if (item.GetType() == CardType.GetType())
+            {
+                match = item;
+                return true;
+            }
+        }
+        print("no match");
+        match = null;
+        return false;
+    }
+
+    
 }

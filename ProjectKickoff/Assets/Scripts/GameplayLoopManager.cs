@@ -28,7 +28,10 @@ public class GameplayLoopManager : MonoBehaviour
     private GameObject theCameraPrefab;
     public GameObject defaultCamera;
     public CardPickerManager cardPickerManager;
-    public List<CardPlacer> cardPlacers;
+    public List<CardPlacer> cardPlacers = new();
+
+
+    private List<CardBase> cardsToKeepInPlay = new();
     void Awake()
     {
         instance = this;
@@ -88,9 +91,20 @@ public class GameplayLoopManager : MonoBehaviour
                     Transform placerTransform = CardPlacer.cardContainer.transform;
                     for (int i = 0; i < placerTransform.childCount; i++)
                     {
-                        Destroy(placerTransform.GetChild(i).gameObject);
+                        if (newState == GameState.placingCards)
+                        {
+                            Transform cardTransform = placerTransform.GetChild(i);
+                            CardBase cardbase = cardTransform.GetComponent<CardBase>();
+                            print(cardbase);
+                            cardsToKeepInPlay.Add((CardBase)cardbase);
+                        }
+                        else
+                        {
+                            Destroy(placerTransform.GetChild(i).gameObject);
+                        }
                     }
                 }
+                
                 break;
             case GameState.choosingCards:
                 
@@ -120,8 +134,16 @@ public class GameplayLoopManager : MonoBehaviour
                 GameManager gamemanager = GameManager.instance;
                 foreach (var card in gamemanager.cardsInDeck)
                 {
-                    gamemanager.AddCardToHand(card);
+                    if (oldState == GameState.platforming && card.ListContainsMatchingType(cardsToKeepInPlay, card, out CardBase match))
+                    {
+                        cardsToKeepInPlay.Remove(match);
+                    }
+                    else
+                    {
+                        gamemanager.AddCardToHand(card);
+                    }
                 }
+                cardsToKeepInPlay.Clear();
                 buttonDonePlacing.SetActive(true);
                 theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
                 break;
