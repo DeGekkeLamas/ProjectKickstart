@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,13 @@ public class CardPickerUI : MonoBehaviour
     public CardBase prefabReference;
     Image thisImage;
 
-    private void Awake()
+
+    [Button]
+    public void Initiate()
     {
         thisImage = GetComponent<Image>();
+        manager = CardPickerManager.instance;
+        prefabReference = manager.currentCardbase;
         thisImage.sprite = prefabReference.cardSprite;
     }
     public void CollectCard()

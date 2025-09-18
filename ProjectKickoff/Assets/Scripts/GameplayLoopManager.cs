@@ -19,12 +19,15 @@ public class GameplayLoopManager : MonoBehaviour
 {
     public static GameplayLoopManager instance;
     public GameObject buttonDonePicking;
+    public GameObject buttonRerollCards;
     public GameObject buttonDonePlacing;
+    public GameObject buttonMakeStartIngDeck;
     public GameObject player;
     public GameObject cameraPanPrefab;
     private GameObject theCameraPrefab;
     public GameObject defaultCamera;
     public CardPickerManager cardPickerManager;
+    public List<CardPlacer> cardPlacers;
     void Awake()
     {
         instance = this;
@@ -40,33 +43,31 @@ public class GameplayLoopManager : MonoBehaviour
     public void SetState(int newState)
     {
         if ((GameState)newState == GetState()) return;
+        GameState oldstate = GetState();
         currentState = (GameState)newState;
-        InitiateState((GameState)newState);
+        InitiateState(oldstate, (GameState)newState);
     }
 
-    private void InitiateState(GameState newState)
+    private void InitiateState(GameState oldState, GameState newState)
     {
-        switch (newState)
+        switch (oldState)//reset stuff
         {
             case GameState.startGame:
-            break;
+                buttonMakeStartIngDeck.SetActive(false);
+                break;
             case GameState.turorial:
             break;
             case GameState.startingDeck:
-            break;
-            case GameState.placingCards:
                 cardPickerManager.ClearCards();
-                GameManager gamemanager = GameManager.instance;
-                foreach (var card in gamemanager.cardsInDeck)
-                {
-                    gamemanager.AddCardToHand(card);
-                }
                 buttonDonePicking.SetActive(false);
-                buttonDonePlacing.SetActive(true);
-                theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
+                buttonRerollCards.SetActive(false);
                 defaultCamera.SetActive(false);
                 break;
-            case GameState.platforming:
+            case GameState.placingCards:
+                foreach (var item in cardPlacers)
+                {
+                    Destroy(item.gameObject);
+                }
                 GameManager gamemanager1 = GameManager.instance;
                 List<CardBase> CardsInHand = new();
                 CardsInHand.AddRange(gamemanager1.cardsInHand);
@@ -76,9 +77,9 @@ public class GameplayLoopManager : MonoBehaviour
                 }
                 buttonDonePlacing.SetActive(false);
                 Destroy(theCameraPrefab);
-                player.SetActive(true);
                 break;
-            case GameState.choosingCards:
+            case GameState.platforming:
+                
                 player.SetActive(false);
                 player.transform.position = player.GetComponent<PlayerController>().spawnPoint;
                 Transform placerTransform = CardPlacer.cardContainer.transform;
@@ -86,11 +87,52 @@ public class GameplayLoopManager : MonoBehaviour
                 {
                     Destroy(placerTransform.GetChild(i).gameObject);
                 }
-                buttonDonePicking.SetActive(true);
-                cardPickerManager.SpawnCards();
+                break;
+            case GameState.choosingCards:
+                
+                cardPickerManager.ClearCards();
+                buttonDonePicking.SetActive(false);
+                defaultCamera.SetActive(false);
             break;
             case GameState.shop:
             break;
         }
+
+
+        switch (newState)//initiate stuff
+        {
+            case GameState.startGame:
+                break;
+            case GameState.turorial:
+                break;
+            case GameState.startingDeck:
+                buttonDonePicking.SetActive(true);
+                buttonRerollCards.SetActive(true);
+                GameManager.instance.CollectedCoins = 7;
+                cardPickerManager.SpawnCards();
+                defaultCamera.SetActive(true);
+                break;
+            case GameState.placingCards:
+                GameManager gamemanager = GameManager.instance;
+                foreach (var card in gamemanager.cardsInDeck)
+                {
+                    gamemanager.AddCardToHand(card);
+                }
+                buttonDonePlacing.SetActive(true);
+                theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
+                break;
+            case GameState.platforming:
+                player.SetActive(true);
+                break;
+            case GameState.choosingCards:
+                GameManager.instance.CollectedCoins++;
+                buttonDonePicking.SetActive(true);
+                cardPickerManager.SpawnCards();
+                defaultCamera.SetActive(true);
+                break;
+            case GameState.shop:
+                break;
+        }
     }
 }
+
