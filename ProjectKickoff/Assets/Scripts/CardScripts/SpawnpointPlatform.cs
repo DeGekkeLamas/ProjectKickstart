@@ -1,17 +1,22 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SpawnpointPlatform : CardBase
 {
     public static Vector3 currentCheckpoint;
     public Vector3 displayCheckpoint;
 
-    protected override void StartEffect()
+    public Sprite ActiveSprite;
+    static List<SpawnpointPlatform> allSpawnpoints = new();
+    private void Awake()
     {
-        PlayerController Player = FindAnyObjectByType<PlayerController>();
-        if (Player != null)
-        {
-            currentCheckpoint = Player.transform.position;
-        }
+        allSpawnpoints.Add(this);
+    }
+
+    protected override void EnterEffect(Collision2D collision)
+    {
+        SetCheckpointSPrite();
+        currentCheckpoint = PlayerController.instance.transform.position;
     }
     protected override void StayEffect(Collision2D collision)
     {
@@ -26,5 +31,14 @@ public class SpawnpointPlatform : CardBase
     protected override void UpdateEffect()
     {
         displayCheckpoint = currentCheckpoint;
+    }
+
+    void SetCheckpointSPrite()
+    {
+        foreach (var spawnpoint in allSpawnpoints)
+        {
+            spawnpoint.GetComponent<SpriteRenderer>().sprite = platformSprite;
+        }
+        this.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
     }
 }
