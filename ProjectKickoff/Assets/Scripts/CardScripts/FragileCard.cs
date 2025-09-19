@@ -22,8 +22,10 @@ public class FragileCard : CardBase
     {
         breakingParticles.transform.parent = null;
         breakingParticles.Play();
-        Destroy(this.gameObject);
-        yield return new WaitForSeconds(1);
-        Destroy(breakingParticles.gameObject);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(2);
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 }
