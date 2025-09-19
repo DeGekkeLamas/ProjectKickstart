@@ -1129,7 +1129,9 @@ MonoBehaviour:
   buttonDonePicking: {fileID: 5654751409915284075}
   buttonRerollCards: {fileID: 330740361389858067}
   buttonDonePlacing: {fileID: 4559346360634394416}
+  buttonToggleVisibility: {fileID: 0}
   buttonMakeStartIngDeck: {fileID: 292923733692770765}
+  buttonChangePlacements: {fileID: 0}
   player: {fileID: 6401381175660002458}
   cameraPanPrefab: {fileID: 7586653988552305677, guid: ef2e838887b746645bc78bc6ba9c1dbe, type: 3}
   defaultCamera: {fileID: 0}
@@ -1317,7 +1319,8 @@ MonoBehaviour:
   cardsInDeck: []
   cardUI: {fileID: 6934540714689669055}
   cardElement: {fileID: 1850075031555201614, guid: fa9115d3a09ce8240838f3af4160808b, type: 3}
-  CollectedCoins: 0
+  collectedCoins: 0
+  coinDisplay: {fileID: 0}
 --- !u!1 &5654751409915284075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,7 +1576,7 @@ MonoBehaviour:
   Instance: {fileID: 7525258480029376426}
   CardUIPickerPrefab: {fileID: 9142660050700018643, guid: 454e7f5e40179274e86f5b98987deb9a, type: 3}
   allCardPrefabs:
-  - {fileID: 9167172630864834454, guid: 71d6dfcc5ebc5d541be4790e6de5be96, type: 3}
+  - {fileID: -8374134481402471380, guid: 71d6dfcc5ebc5d541be4790e6de5be96, type: 3}
   - {fileID: 4898158841586021447, guid: e6e26270d4bcbe4438a4c64ee0a9852b, type: 3}
   - {fileID: 6625149055481410893, guid: 196a413455845c648859818988ab40d7, type: 3}
   - {fileID: 4898158841586021447, guid: ca6a02d1383d1c848ab7135e125d9d5a, type: 3}
