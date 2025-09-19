@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             FoldoutCard card = Instantiate(cardElement, cardUI.transform);
             card.GetComponent<Image>().sprite = cardsInHand[i].GetComponent<CardBase>().cardSprite;
+            card.GetComponentInChildren<TMP_Text>().text = cardsInHand[i].GetComponent<CardBase>().cardText;
             card.index = i;
             cardUI.currentCards.Add(card.gameObject);
         }

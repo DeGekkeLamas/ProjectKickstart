@@ -16,7 +16,7 @@ public class CardBase : MonoBehaviour
     public Sprite cardSprite;
     [InfoBox("platformSprite is only needed if the root gameobject with this has no spriterenderer, otherwise leave this empty")]
     public Sprite platformSprite;
-
+    public string cardText;
     private void Start() { StartEffect(); }
     private void Update() { UpdateEffect(); }
 

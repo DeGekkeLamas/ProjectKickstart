@@ -149,3 +149,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalPrefab: {fileID: 0}
   cardSprite: {fileID: 21300000, guid: 7dd0c08f6a7db4e4ab2c3ee16bda1ff0, type: 3}
+  platformSprite: {fileID: 0}
+  cardText: With springs on your boots you can jump to the stars!

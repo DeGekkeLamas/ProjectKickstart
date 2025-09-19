@@ -150,4 +150,6 @@ MonoBehaviour:
   originalPrefab: {fileID: 0}
   cardSprite: {fileID: 21300000, guid: c612400b037599645a4d651845e81539, type: 3}
   platformSprite: {fileID: 0}
+  cardText: this platform launches the player up like a vulcano launches ash into
+    the sky
   DashDirection: {x: 0, y: 1200, z: 0}
