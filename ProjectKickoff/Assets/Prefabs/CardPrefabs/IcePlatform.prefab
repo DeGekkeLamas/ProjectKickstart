@@ -104,7 +104,7 @@ MonoBehaviour:
   originalPrefab: {fileID: 0}
   cardSprite: {fileID: 21300000, guid: 1ab80e02f308b6e418b94598c2b11b0f, type: 3}
   platformSprite: {fileID: 0}
-  cardText: This platform is very slippery, because it's made of ice.
+  cardText: This platform is cold as ice and willing to sacrifice on grip
 --- !u!61 &-7232103355502057016
 BoxCollider2D:
   m_ObjectHideFlags: 0
