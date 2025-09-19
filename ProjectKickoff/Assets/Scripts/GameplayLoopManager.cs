@@ -21,6 +21,7 @@ public class GameplayLoopManager : MonoBehaviour
     public GameObject buttonDonePicking;
     public GameObject buttonRerollCards;
     public GameObject buttonDonePlacing;
+    public GameObject buttonToggleVisibility;
     public GameObject buttonMakeStartIngDeck;
     public GameObject buttonChangePlacements;
     public GameObject player;
@@ -80,6 +81,7 @@ public class GameplayLoopManager : MonoBehaviour
                     gamemanager1.RemoveCardFromHand(item);
                 }
                 buttonDonePlacing.SetActive(false);
+                buttonToggleVisibility.SetActive(false);
                 Destroy(theCameraPrefab);
                 break;
             case GameState.platforming:
@@ -145,6 +147,7 @@ public class GameplayLoopManager : MonoBehaviour
                 }
                 cardsToKeepInPlay.Clear();
                 buttonDonePlacing.SetActive(true);
+                buttonToggleVisibility.SetActive(true);
                 theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
                 break;
             case GameState.platforming:

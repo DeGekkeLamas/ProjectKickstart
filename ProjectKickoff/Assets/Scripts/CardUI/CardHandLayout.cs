@@ -54,4 +54,9 @@ public class CardHandLayout : MonoBehaviour
             currentCards[i].transform.SetSiblingIndex(0);
         }
     }
+
+    public void SwitchVisibility()
+    {
+        gameObject.SetActive(!gameObject.activeInHierarchy);
+    }
 }
