@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class CardPickerManager : MonoBehaviour
     public CardBase currentCardbase;
     public int maxCardsToPick = 6;
     [HideInInspector] public int cardsPicked;
+    public TMP_Text cardsPickedCounter;
 
     [Button]
     void Awake()
@@ -59,5 +61,10 @@ public class CardPickerManager : MonoBehaviour
     {
         Destroy(instance);
         GameManager.instance.AddCardToDeck(prefabReference);
+    }
+
+    public void UpdateCardCounter()
+    {
+        cardsPickedCounter.text = $"Cards picked: {cardsPicked} / {maxCardsToPick}";
     }
 }

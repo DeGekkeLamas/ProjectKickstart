@@ -59,10 +59,13 @@ public class GameplayLoopManager : MonoBehaviour
         {
             case GameState.startGame:
                 buttonMakeStartIngDeck.SetActive(false);
+                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.UpdateCardCounter();
                 break;
             case GameState.turorial:
             break;
             case GameState.startingDeck:
+                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(false);
                 cardPickerManager.ClearCards();
                 buttonDonePicking.SetActive(false);
                 buttonRerollCards.SetActive(false);

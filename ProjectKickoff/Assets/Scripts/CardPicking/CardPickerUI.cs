@@ -25,6 +25,7 @@ public class CardPickerUI : MonoBehaviour
         {
             manager.CollectCard(gameObject, prefabReference);
             CardPickerManager.instance.cardsPicked++;
+            CardPickerManager.instance.UpdateCardCounter();
         }
         else
         {
