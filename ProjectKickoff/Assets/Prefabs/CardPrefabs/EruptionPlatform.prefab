@@ -148,5 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalPrefab: {fileID: 0}
-  cardSprite: {fileID: 21300000, guid: 7255c5c8f342487489b2f8b45871f544, type: 3}
-  DashDirection: {x: 0, y: 6, z: 0}
+  cardSprite: {fileID: 21300000, guid: c612400b037599645a4d651845e81539, type: 3}
+  platformSprite: {fileID: 0}
+  DashDirection: {x: 0, y: 1200, z: 0}
