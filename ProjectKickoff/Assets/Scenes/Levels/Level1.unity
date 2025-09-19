@@ -17302,6 +17302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelCore
       objectReference: {fileID: 0}
+    - target: {fileID: 1025997237816890763, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1436228490249133088, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: m_Size.x
       value: 54
