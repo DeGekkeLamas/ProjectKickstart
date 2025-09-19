@@ -21,6 +21,14 @@ public class CardPickerUI : MonoBehaviour
     public void CollectCard()
     {
         print("collectingCard");
-        manager.CollectCard(gameObject, prefabReference);
+        if (CardPickerManager.instance.maxCardsToPick > CardPickerManager.instance.cardsPicked)
+        {
+            manager.CollectCard(gameObject, prefabReference);
+            CardPickerManager.instance.cardsPicked++;
+        }
+        else
+        {
+            Debug.Log("Hand is full already");
+        }
     }
 }

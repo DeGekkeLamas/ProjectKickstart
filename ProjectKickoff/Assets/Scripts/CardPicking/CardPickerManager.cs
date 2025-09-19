@@ -13,12 +13,13 @@ public class CardPickerManager : MonoBehaviour
     public List<Vector2> positions = new();
     public List<GameObject> selectedCards = new();
     public CardBase currentCardbase;
+    public int maxCardsToPick = 6;
+    [HideInInspector] public int cardsPicked;
 
     [Button]
     void Awake()
     {
         instance = this;
-        Instance = instance;
     }
 
     private CardBase GenerateRandomCard()
