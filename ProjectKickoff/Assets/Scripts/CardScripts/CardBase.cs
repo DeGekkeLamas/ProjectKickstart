@@ -14,6 +14,8 @@ public class CardBase : MonoBehaviour
 
     [Tooltip("The sprite used for the card in hand UI")]
     public Sprite cardSprite;
+    [InfoBox("platformSprite is only needed if the root gameobject with this has no spriterenderer, otherwise leave this empty")]
+    public Sprite platformSprite;
 
     private void Start() { StartEffect(); }
     private void Update() { UpdateEffect(); }

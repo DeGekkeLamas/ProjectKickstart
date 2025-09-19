@@ -39,7 +39,7 @@ public class BackgroundPlayerFollower : MonoBehaviour
     {
         if (BGPiecesSpawned.ContainsKey(position))
         {
-            Debug.Log("Did not spawn object");
+            //Debug.Log("Did not spawn object");
             return;
         }
         BGPiecesSpawned[position] = Instantiate(originalSprite, position, Quaternion.identity, this.transform);

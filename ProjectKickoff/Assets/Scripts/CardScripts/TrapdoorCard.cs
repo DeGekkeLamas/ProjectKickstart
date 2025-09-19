@@ -54,8 +54,8 @@ public class TrapdoorCard : CardBase
     {
         for(int i =  0; i < 90f/animationSpeed; i++)
         {
-            pivotL.transform.eulerAngles -= new Vector3(0, 0, animationSpeed);
-            pivotR.transform.eulerAngles -= new Vector3(0, 0, -animationSpeed);
+            pivotL.transform.eulerAngles += new Vector3(0, 0, animationSpeed);
+            pivotR.transform.eulerAngles += new Vector3(0, 0, -animationSpeed);
             yield return new WaitForFixedUpdate();
         }
     }

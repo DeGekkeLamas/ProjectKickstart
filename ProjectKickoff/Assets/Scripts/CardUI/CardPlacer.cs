@@ -1,7 +1,6 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using Unity.VisualScripting;
 
 public class CardPlacer : MonoBehaviour
 {
@@ -19,9 +18,26 @@ public class CardPlacer : MonoBehaviour
     {
         if (cardContainer == null) cardContainer = new GameObject("CardContainer");
         CardBase cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
+        // Destroy physical crd stuff
         Destroy(cardObject.GetComponent<Collider2D>());
         Destroy(cardObject.GetComponent<CardBase>());
-        renderer = cardObject.GetComponent<SpriteRenderer>();
+        if (cardObject.TryGetComponent(out SpriteRenderer renderer))
+        {
+            this.renderer = renderer;
+        }
+        else
+        {
+            this.renderer = cardObject.AddComponent<SpriteRenderer>();
+            this.renderer.sprite = cardObject.platformSprite;
+            this.renderer.sortingOrder = 5;
+        }
+
+        // Destroy children
+        for(int i = cardObject.transform.childCount; i > 0; i-- )
+        {
+            Destroy(cardObject.transform.GetChild(i-1).gameObject);
+        }
+
         cardRotation = 0;
         cardPosition = Vector3.zero;
         cardPosSet = false;
@@ -49,7 +65,7 @@ public class CardPlacer : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(cardRotation, Vector3.forward);
 
         // Check if valid spot on click
-        Bounds objectBounds = this.transform.GetChild(0).GetComponent<Renderer>().bounds;
+        Bounds objectBounds = this.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds;
         RaycastHit2D pointOccupied = Physics2D.BoxCast(objectBounds.center, objectBounds.size, cardRotation, Vector2.zero);
         bool hitSomething = pointOccupied.collider != null;
         DebugExtension.DebugBounds(objectBounds, hitSomething ? Color.green : Color.red);
