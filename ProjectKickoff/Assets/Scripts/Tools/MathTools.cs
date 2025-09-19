@@ -63,4 +63,14 @@ public static class MathTools
         return new(a.x * b.x, a.y * b.y, a.z * b.z);
     }
 
+    public static Vector3 Vector3Divide(Vector3 a, Vector3 b)
+    {
+        return new(a.x / b.x, a.y / b.y, a.z / b.z);
+    }
+
+    public static Vector3 Vector3Round(Vector3 input)
+    {
+        return new(Mathf.Round(input.x), Mathf.Round(input.y), Mathf.Round(input.z));
+    }
+
 }
