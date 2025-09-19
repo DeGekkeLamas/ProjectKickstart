@@ -30,7 +30,7 @@ public class CardPickerManager : MonoBehaviour
     public void SpawnCards()
     {
         if (Application.isPlaying && GameManager.instance.collectedCoins < 1) return;
-        if (Application.isPlaying) GameManager.instance.collectedCoins--;
+        if (Application.isPlaying) GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins - 1);
         ClearCards();
         for (int i = 0; i < cardsCount; i++)
         {

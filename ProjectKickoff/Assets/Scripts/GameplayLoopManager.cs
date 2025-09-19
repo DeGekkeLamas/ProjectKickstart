@@ -126,7 +126,7 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.startingDeck:
                 buttonDonePicking.SetActive(true);
                 buttonRerollCards.SetActive(true);
-                GameManager.instance.collectedCoins = 7;
+                GameManager.instance.UpdateCoinCount(7);
                 cardPickerManager.SpawnCards();
                 defaultCamera.SetActive(true);
                 break;
@@ -152,7 +152,7 @@ public class GameplayLoopManager : MonoBehaviour
                 buttonChangePlacements.SetActive(true);
                 break;
             case GameState.choosingCards:
-                GameManager.instance.collectedCoins++;
+                GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins + 1);
                 buttonDonePicking.SetActive(true);
                 cardPickerManager.SpawnCards();
                 defaultCamera.SetActive(true);
