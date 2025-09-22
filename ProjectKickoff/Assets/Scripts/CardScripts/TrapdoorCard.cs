@@ -10,6 +10,7 @@ public class TrapdoorCard : CardBase
     public Transform pivotR;
     public Transform pivotL;
     public float animationSpeed = 1;
+    bool isOpened;
     private void Awake()
     {
         thisCardsCollider = GetComponent<Collider2D>();
@@ -30,7 +31,11 @@ public class TrapdoorCard : CardBase
     }
     protected override void ExitEffect(Collision2D collision)
     {
-        StartCoroutine(ResetTrapdoor());
+        if (isOpened)
+        {
+            StartCoroutine(ResetTrapdoor());
+            isOpened = false;
+        }
     }
 
     IEnumerator ResetTrapdoor()
@@ -48,6 +53,7 @@ public class TrapdoorCard : CardBase
             pivotR.transform.eulerAngles -= new Vector3(0, 0, -animationSpeed);
             yield return new WaitForFixedUpdate();
         }
+        isOpened = true;
     }
 
     IEnumerator CloseAnimation()

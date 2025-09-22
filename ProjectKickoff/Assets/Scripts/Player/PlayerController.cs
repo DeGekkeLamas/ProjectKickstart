@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 1;
     [Tooltip("Multiplies with jumpforce, set to 1 to be the same as jumpforce")]
     public float wallJumpIntensity = .5f;
+
+    [Header("Events")]
+    public UnityEvent onJump;
     void Awake()
     {
         instance = this;
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
     void DoJump()
     {
         _rigidbody.AddForce(transform.up * jumpForce);
+        onJump.Invoke();
     }
 
     public bool DoMove(Vector2 movement)//tests horizontalMovement
@@ -131,6 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.AddForce(jumpForce * wallJumpIntensity * direction.normalized);
         _rigidbody.AddForce(jumpForce * wallJumpIntensity * Vector3.up);
+        onJump.Invoke();
     }
 
     public void Death()

@@ -18,8 +18,8 @@ public class SpawnpointPlatform : CardBase
     protected override void EnterEffect(Collision2D collision)
     {
         SetCheckpointSprite();
-        PlayerController.instance.spawnPoint = new(this.transform.position.x, 
-            PlayerController.instance.transform.position.y, this.transform.position.z);
+        PlayerController.instance.spawnPoint = this.transform.position + this.transform.up * 
+            PlayerController.instance.transform.lossyScale.y;
             print("spawnpoint set");
     }
 

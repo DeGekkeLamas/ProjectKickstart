@@ -39,10 +39,11 @@ public class BackgroundPlayerFollower : MonoBehaviour
     {
         if (BGPiecesSpawned.ContainsKey(position))
         {
-            //Debug.Log("Did not spawn object");
             return;
         }
-        BGPiecesSpawned[position] = Instantiate(originalSprite, position, Quaternion.identity, this.transform);
+        Debug.Log("Spawned wallpiece");
+        BGPiecesSpawned[position] = Instantiate(originalSprite, position + 
+            MathTools.Vector3Modulo(this.transform.position, spriteDimensions), Quaternion.identity, this.transform);
     }
 
     Vector3 RoundToNearestSpritePos(Vector3 input)
