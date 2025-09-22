@@ -13,12 +13,16 @@ public class CardPlacer : MonoBehaviour
     private Vector3 cardPosition;
     private float cardRotation;
     private bool cardPosSet;
+    Bounds objectBounds;
 
     private void Start()
     {
+
         if (cardContainer == null) cardContainer = new GameObject("CardContainer");
         CardBase cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
-        // Destroy physical crd stuff
+        // Set object bounds
+        objectBounds = cardObject.transform.GetComponent<Collider2D>().bounds;
+        // Destroy physical card stuff
         Destroy(cardObject.GetComponent<Collider2D>());
         Destroy(cardObject.GetComponent<CardBase>());
         if (cardObject.TryGetComponent(out SpriteRenderer renderer))
@@ -65,7 +69,7 @@ public class CardPlacer : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(cardRotation, Vector3.forward);
 
         // Check if valid spot on click
-        Bounds objectBounds = this.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds;
+        objectBounds.center = this.transform.position;
         RaycastHit2D pointOccupied = Physics2D.BoxCast(objectBounds.center, objectBounds.size, cardRotation, Vector2.zero);
         bool hitSomething = pointOccupied.collider != null;
         DebugExtension.DebugBounds(objectBounds, hitSomething ? Color.green : Color.red);
