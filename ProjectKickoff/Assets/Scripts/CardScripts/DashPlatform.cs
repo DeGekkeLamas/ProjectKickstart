@@ -4,17 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(MovingObject))]
 public class DashPlatform : CardBase
 {
-    public Vector3 DashDirection;
+    public Vector3 dashDirection;
 
     private void Awake()
     {
         MovingObject move = this.GetComponent<MovingObject>();
-        move.moveRange = DashDirection.normalized / 10f;
+        move.moveRange = dashDirection.normalized / 10f;
     }
     protected override void EnterEffect(Collision2D collision)
     {
         Rigidbody2D playerRigidBody = collision.collider.gameObject.GetComponent<Rigidbody2D>();
-        playerRigidBody.AddForce(DashDirection, ForceMode2D.Force);
+        Vector3 usedRotation= VectorMath.RotateVectorXY(dashDirection, transform.rotation.eulerAngles.z);
+        playerRigidBody.AddForce(usedRotation);
 
     }
 }
