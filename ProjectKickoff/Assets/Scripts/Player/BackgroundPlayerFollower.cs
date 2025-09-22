@@ -9,30 +9,23 @@ public class BackgroundPlayerFollower : MonoBehaviour
 
     Dictionary<Vector3, GameObject> BGPiecesSpawned = new();
 
-    private void Awake()
+    private void Start()
     {
         spriteDimensions = originalSprite.GetComponent<SpriteRenderer>().bounds.size;
+
+        // Spawn bg pieces
+        for(int x = 0; x < LevelData.instance.levelBounds.size.x * 1f / spriteDimensions.x; x++)
+        {
+            for (int y = 0; y < LevelData.instance.levelBounds.size.y * 1f / spriteDimensions.y; y++)
+            {
+                Instantiate(originalSprite, new(x * spriteDimensions.x, 
+                    y * spriteDimensions.y, 0), Quaternion.identity, this.transform);
+            }
+        }
     }
     void LateUpdate()
     {
         transform.position = Camera.main.transform.position * followSpeed;
-
-        Bounds camBounds = new( Camera.main.transform.position, 
-            new Vector3(Camera.main.orthographicSize * Screen.width / Screen.height, Camera.main.orthographicSize) * 2 );
-        DebugExtension.DebugBounds(camBounds, Color.magenta);
-
-        Vector3 pos = transform.position;
-        for(int x = 0; x < (RoundToNearestSpritePos(camBounds.size + pos).x - pos.x) / spriteDimensions.x + 1; x++)
-        {
-            for (int y = 0; y < (RoundToNearestSpritePos(camBounds.size + pos).y - pos.y) / spriteDimensions.y + 1; y++)
-            {
-                Vector3 spawnPos = RoundToNearestSpritePos(new(camBounds.min.x + x * spriteDimensions.x,
-                    camBounds.min.y + y * spriteDimensions.y
-                    , 0) );
-                DebugExtension.DebugWireSphere(spawnPos, Color.blue, 1);
-                SpawnSprite(spawnPos);
-            }
-        }
     }
 
     void SpawnSprite(Vector3 position)
