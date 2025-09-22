@@ -73,4 +73,8 @@ public static class MathTools
         return new(Mathf.Round(input.x), Mathf.Round(input.y), Mathf.Round(input.z));
     }
 
+    public static Vector3 Vector3Modulo(Vector3 input, Vector3 amount)
+    {
+        return new(input.x % amount.x, input.y % amount.y, input.z % amount.z);
+    }
 }
