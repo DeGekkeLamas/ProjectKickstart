@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     Collider2D _collider;
     Rigidbody2D _rigidbody;
     public static PlayerController instance;
-    public Vector3 spawnPoint;
+    [HideInInspector] public Vector3 spawnPoint;
+    [HideInInspector] public Vector3 worldSpawn;
 
     public float moveSpeed = 1;
     public float sprintMultiplier = 2;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
 
         spawnPoint = transform.position;
+        worldSpawn = transform.position;
     }
 
     void Update()

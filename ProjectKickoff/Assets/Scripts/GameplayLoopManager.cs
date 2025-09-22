@@ -90,7 +90,7 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.platforming:
                 buttonChangePlacements.SetActive(false);
                 player.SetActive(false);
-                player.transform.position = player.GetComponent<PlayerController>().spawnPoint;
+                player.transform.position = player.GetComponent<PlayerController>().worldSpawn;
                 if (CardPlacer.cardContainer != null)
                 {
                     Transform placerTransform = CardPlacer.cardContainer.transform;
