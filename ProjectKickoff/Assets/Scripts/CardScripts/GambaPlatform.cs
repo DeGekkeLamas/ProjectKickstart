@@ -37,6 +37,8 @@ public class GambaPlatform : CardBase
         CardBase spawned = Instantiate(possibleEffects[index], this.transform.position,
             this.transform.rotation, this.transform.parent);
         spawned.originalPrefab = possibleEffects[index];
+        GameManager.instance.cardsInDeck.Add(possibleEffects[index]);
+        GameManager.instance.cardsInDeck.Remove(originalPrefab);
         Destroy(this.gameObject);
     }
 }
