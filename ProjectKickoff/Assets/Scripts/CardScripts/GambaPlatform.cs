@@ -33,8 +33,10 @@ public class GambaPlatform : CardBase
             return;
         }
 
-        Instantiate(possibleEffects[Random.Range(0, possibleEffects.Length)], this.transform.position,
+        int index = Random.Range(0, possibleEffects.Length);
+        CardBase spawned = Instantiate(possibleEffects[index], this.transform.position,
             this.transform.rotation, this.transform.parent);
+        spawned.originalPrefab = possibleEffects[index];
         Destroy(this.gameObject);
     }
 }
