@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             this.transform.lossyScale - new Vector3(this.transform.lossyScale.x * .5f, 0)
             , 0, Vector3.down, .1f, ~LayerMask.GetMask("Player"));
         bool hitSomething = hit.collider != null;
-        if (hitSomething) if (hit.collider.TryGetComponent<Collider2D>(out Collider2D theCollider)) if(theCollider.sharedMaterial) if(theCollider.sharedMaterial.bounciness > 0.1f) hitSomething = false;//so the player can't jump off of the trampoline card.
+        if (hitSomething) if (hit.collider.tag == "Not_Jumpable") hitSomething = false;//so the player can't jump off of the trampoline card and the eruption card.
         bool angleOutOfRange = Vector2.Dot(Vector2.up, hit.normal) <= 0;
 
         // Debug
