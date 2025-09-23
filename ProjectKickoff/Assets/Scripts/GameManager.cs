@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
             GameObject cardObject = Instantiate(cardElement, cardUI.transform);
             FoldoutCard cardScript = cardObject.GetComponentInChildren<FoldoutCard>();
             cardScript.transform.GetComponent<Image>().sprite = cardsInHand[i].GetComponent<CardBase>().cardSprite;
-            cardScript.transform.GetComponentInChildren<TMP_Text>().text = cardsInHand[i].GetComponent<CardBase>().cardText;
+            cardScript.titleText.text = StringTools.CamelcaseToRegular(cardsInHand[i].name);
+            cardScript.descriptionText.text = cardsInHand[i].GetComponent<CardBase>().cardText;
             cardScript.index = i;
             cardUI.currentCards.Add(cardObject);
         }
