@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
         spawnPoint = transform.position;
         worldSpawn = transform.position;
     }
+    private void OnDisable()
+    {
+        SpawnpointPlatform.SetAllInactive();
+    }
 
     void Update()
     {

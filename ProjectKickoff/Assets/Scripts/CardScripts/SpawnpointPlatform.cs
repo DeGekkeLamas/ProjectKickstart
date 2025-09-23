@@ -27,8 +27,21 @@ public class SpawnpointPlatform : CardBase
     {
         foreach (var spawnpoint in allSpawnpoints)
         {
-            spawnpoint.GetComponent<SpriteRenderer>().sprite = platformSprite;
+            spawnpoint.SetToInactiveDisplay();
         }
         this.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
+    }
+
+    void SetToInactiveDisplay()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = platformSprite;
+    }
+
+    public static void SetAllInactive()
+    {
+        foreach (var spawnpoint in allSpawnpoints)
+        {
+            spawnpoint.SetToInactiveDisplay();
+        }
     }
 }

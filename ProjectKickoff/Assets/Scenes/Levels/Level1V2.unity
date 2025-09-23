@@ -67385,6 +67385,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 2007350d3f690744fbbafb2151931176, type: 3}
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: maxCardsToPick
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: cardsPickedCounter
       value: 
       objectReference: {fileID: 1318729206}
