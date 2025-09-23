@@ -41,6 +41,7 @@ public class CardBase : MonoBehaviour
         if (GameplayLoopManager.instance.currentState != GameState.placingCards) return;
 
         GameManager.instance.AddCardToHand(originalPrefab);
+        AudioPlayer.Play(AudioPlayer.instance.placementSound);
         Destroy(this.gameObject);
     }
 

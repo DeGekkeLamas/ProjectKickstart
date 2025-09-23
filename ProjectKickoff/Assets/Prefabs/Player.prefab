@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9154922853648490103
 Transform:
   m_ObjectHideFlags: 0
@@ -176,10 +176,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
+  worldSpawn: {x: 0, y: 0, z: 0}
   moveSpeed: 4
   sprintMultiplier: 2
   jumpForce: 600
   wallJumpIntensity: 0.75
+  onJump:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6530767887455501705
 GameObject:
   m_ObjectHideFlags: 0
