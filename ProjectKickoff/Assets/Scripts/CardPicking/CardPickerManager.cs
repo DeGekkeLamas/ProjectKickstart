@@ -15,6 +15,7 @@ public class CardPickerManager : MonoBehaviour
     public List<GameObject> selectedCards = new();
     public CardBase currentCardbase;
     public int maxCardsToPick = 6;
+    public AudioClip cardFoldNoise;
     [HideInInspector] public int cardsPicked;
     public TMP_Text cardsPickedCounter;
 
@@ -35,6 +36,7 @@ public class CardPickerManager : MonoBehaviour
         if (Application.isPlaying && GameManager.instance.collectedCoins < 1) return;
         if (Application.isPlaying) GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins - 1);
         ClearCards();
+        AudioPlayer.Play(cardFoldNoise);
         for (int i = 0; i < cardsCount; i++)
         {
             currentCardbase = GenerateRandomCard();
