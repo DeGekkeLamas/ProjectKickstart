@@ -8,7 +8,8 @@ public class CardPickerUI : MonoBehaviour
 {
     public CardPickerManager manager;
     public CardBase prefabReference;
-    public TMP_Text textMeshPro;
+    public TMP_Text cardDescription;
+    public TMP_Text cardTitle;
     Image thisImage;
 
 
@@ -16,11 +17,11 @@ public class CardPickerUI : MonoBehaviour
     public void Initiate()
     {
         thisImage = GetComponent<Image>();
-        textMeshPro = GetComponentInChildren<TMP_Text>();
         manager = CardPickerManager.instance;
         prefabReference = manager.currentCardbase;
         thisImage.sprite = prefabReference.cardSprite;
-        textMeshPro.text = prefabReference.cardText;
+        cardDescription.text = prefabReference.cardText;
+        cardTitle.text = StringTools.CamelcaseToRegular(prefabReference.name);
     }
     public void CollectCard()
     {

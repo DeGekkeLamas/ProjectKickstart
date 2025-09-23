@@ -102,7 +102,7 @@ public class GameplayLoopManager : MonoBehaviour
                         {
                             Transform cardTransform = placerTransform.GetChild(i);
                             CardBase cardbase = cardTransform.GetComponent<CardBase>();
-                            print(cardbase);
+                            //print(cardbase);
                             cardsToKeepInPlay.Add((CardBase)cardbase);
                         }
                         else
