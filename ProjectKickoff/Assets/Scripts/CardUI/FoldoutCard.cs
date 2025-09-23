@@ -49,6 +49,7 @@ public class FoldoutCard : MonoBehaviour
         }
 
         isFoldingOut = true;
+
         //originalRotation = this.transform.localEulerAngles;
         float inverseDuration = 1f / animationDuration;
         float factor = Mathf.Pow(maxScaleFactor, inverseDuration);
@@ -61,9 +62,12 @@ public class FoldoutCard : MonoBehaviour
                 Vector3.zero : new(0,0,360), inverseDuration * (i+1));
             this.transform.position += new Vector3(0,extraHeight/animationDuration,0) * transform.root.localScale.x;
 
+            
+
             yield return new WaitForFixedUpdate();
         }
-        this.transform.SetSiblingIndex(cardSet.currentCards.Count - 1);
+        this.GetComponent<Canvas>().sortingOrder = 1;
+        //this.transform.parent.SetSiblingIndex(cardSet.currentCards.Count - 1);
         isFoldingOut = false;
     }
 
@@ -102,8 +106,8 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
-        cardSet.CorrectHierarchy();
-
+        //cardSet.CorrectHierarchy();
+        this.GetComponent<Canvas>().sortingOrder = 0;
         isFoldingIn = false;
         hasEnteredHover = false;
     }

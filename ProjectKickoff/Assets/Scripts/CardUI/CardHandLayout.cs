@@ -45,6 +45,7 @@ public class CardHandLayout : MonoBehaviour
             displayUIElement.transform.position = this.transform.position +
                 new Vector3(Mathf.Lerp(PlacementRange.x, PlacementRange.y, 1 - inverseI),
                 Mathf.Sin(inverseI * Mathf.PI) * curveHeight, 0) * canvasScale;
+            displayUIElement.GetComponent<Canvas>().sortingOrder = 0;
 
             // Color used for old debug, no longer needed mostly
             //currentCards[i].GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, inverseI);
@@ -61,7 +62,7 @@ public class CardHandLayout : MonoBehaviour
     {
         for (int i = 0; i < currentCards.Count; i++)
         {
-            currentCards[i].transform.SetSiblingIndex(0);
+            currentCards[i].transform.parent.SetSiblingIndex(0);
         }
     }
 
