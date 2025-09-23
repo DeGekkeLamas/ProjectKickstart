@@ -112,7 +112,8 @@ public class GameplayLoopManager : MonoBehaviour
                 
                 break;
             case GameState.choosingCards:
-                
+                GameManager.instance.cardsInDeck.Clear();
+                cardPickerManager.cardsPicked = 0;
                 cardPickerManager.ClearCards();
                 buttonDonePicking.SetActive(false);
                 defaultCamera.SetActive(false);
