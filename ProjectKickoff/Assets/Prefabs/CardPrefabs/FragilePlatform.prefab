@@ -4904,7 +4904,7 @@ GameObject:
   - component: {fileID: 8274367220920949852}
   - component: {fileID: 4233560753172818324}
   m_Layer: 0
-  m_Name: Fragile platform
+  m_Name: FragilePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
