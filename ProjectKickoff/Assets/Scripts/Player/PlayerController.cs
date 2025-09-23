@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onJump;
-    void Awake()
+    void OnEnable()
     {
         instance = this;
         _collider = GetComponent<Collider2D>();
