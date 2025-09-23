@@ -67080,6 +67080,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6464651337154704472, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: cardElement
+      value: 
+      objectReference: {fileID: 9142660050700018643, guid: fa9115d3a09ce8240838f3af4160808b, type: 3}
     - target: {fileID: 6500111865077204741, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: m_fontColor.b
       value: 1
