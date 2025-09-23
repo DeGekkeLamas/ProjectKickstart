@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public CardHandLayout cardUI;
-    public FoldoutCard cardElement;
+    public GameObject cardElement;
 
     public int collectedCoins;
     public TMP_Text coinDisplay;
@@ -30,11 +30,12 @@ public class GameManager : MonoBehaviour
         cardUI.currentCards.Clear();
         for (int i = 0; i < cardsInHand.Count; i++)
         {
-            FoldoutCard card = Instantiate(cardElement, cardUI.transform);
-            card.GetComponent<Image>().sprite = cardsInHand[i].GetComponent<CardBase>().cardSprite;
-            card.GetComponentInChildren<TMP_Text>().text = cardsInHand[i].GetComponent<CardBase>().cardText;
-            card.index = i;
-            cardUI.currentCards.Add(card.gameObject);
+            GameObject cardObject = Instantiate(cardElement, cardUI.transform);
+            FoldoutCard cardScript = cardObject.GetComponentInChildren<FoldoutCard>();
+            cardScript.transform.GetComponent<Image>().sprite = cardsInHand[i].GetComponent<CardBase>().cardSprite;
+            cardScript.transform.GetComponentInChildren<TMP_Text>().text = cardsInHand[i].GetComponent<CardBase>().cardText;
+            cardScript.index = i;
+            cardUI.currentCards.Add(cardObject);
         }
         cardUI.SetCardPositions();
     }

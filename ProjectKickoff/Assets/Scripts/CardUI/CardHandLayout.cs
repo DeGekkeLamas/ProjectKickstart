@@ -32,10 +32,20 @@ public class CardHandLayout : MonoBehaviour
         {
             // Place card
             float inverseI = 1f/Mathf.Max(1,currentCards.Count-1) * i;
-            currentCards[i].transform.eulerAngles = new(0,0, Mathf.Lerp(rotationRange.x,rotationRange.y, inverseI));
-            currentCards[i].transform.position = this.transform.position + 
+            GameObject baseUIElement = currentCards[i];//this is the cardUIBaseObject
+            GameObject colliderUIElement = baseUIElement.transform.GetChild(0).gameObject;//this is the collider UIElement
+            GameObject displayUIElement = baseUIElement.transform.GetChild(1).gameObject;//this is the display UIElement
+
+            colliderUIElement.transform.eulerAngles = new(0, 0, Mathf.Lerp(rotationRange.x,rotationRange.y, inverseI));
+            displayUIElement.transform.eulerAngles = new(0, 0, Mathf.Lerp(rotationRange.x, rotationRange.y, inverseI));
+            baseUIElement.GetComponentInChildren<FoldoutCard>().originalRotation = colliderUIElement.transform.localEulerAngles;
+            colliderUIElement.transform.position = this.transform.position + 
                 new Vector3(Mathf.Lerp(PlacementRange.x, PlacementRange.y, 1-inverseI), 
                 Mathf.Sin(inverseI * Mathf.PI) * curveHeight, 0) * canvasScale;
+            displayUIElement.transform.position = this.transform.position +
+                new Vector3(Mathf.Lerp(PlacementRange.x, PlacementRange.y, 1 - inverseI),
+                Mathf.Sin(inverseI * Mathf.PI) * curveHeight, 0) * canvasScale;
+
             // Color used for old debug, no longer needed mostly
             //currentCards[i].GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, inverseI);
 

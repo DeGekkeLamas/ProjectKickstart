@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ using UnityEngine;
 public class FoldoutCard : MonoBehaviour
 {
     Vector3 originalScale;
-    Vector3 originalRotation;
+    public Vector3 originalRotation;
     public float maxScaleFactor = 3;
     public int animationDuration = 30;
     public float extraHeight = 30;
@@ -20,7 +22,7 @@ public class FoldoutCard : MonoBehaviour
     CardHandLayout cardSet;
     private void Awake()
     {
-        cardSet = this.transform.parent.GetComponent<CardHandLayout>();
+        cardSet = this.transform.parent.parent.GetComponent<CardHandLayout>();
         originalScale = transform.localScale;
     }
 
@@ -47,7 +49,7 @@ public class FoldoutCard : MonoBehaviour
         }
 
         isFoldingOut = true;
-        originalRotation = this.transform.localEulerAngles;
+        //originalRotation = this.transform.localEulerAngles;
         float inverseDuration = 1f / animationDuration;
         float factor = Mathf.Pow(maxScaleFactor, inverseDuration);
 
@@ -61,7 +63,7 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
-        this.transform.SetSiblingIndex( cardSet.currentCards.Count-1 );
+        this.transform.SetSiblingIndex(cardSet.currentCards.Count - 1);
         isFoldingOut = false;
     }
 
