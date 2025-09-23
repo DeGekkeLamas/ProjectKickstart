@@ -61,13 +61,13 @@ public class GameplayLoopManager : MonoBehaviour
         {
             case GameState.startGame:
                 buttonMakeStartIngDeck.SetActive(false);
-                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(true);
                 CardPickerManager.instance.UpdateCardCounter();
                 break;
             case GameState.turorial:
             break;
             case GameState.startingDeck:
-                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(false);
+                CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(false);
                 cardPickerManager.ClearCards();
                 buttonDonePicking.SetActive(false);
                 buttonRerollCards.SetActive(false);
@@ -116,7 +116,7 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.choosingCards:
                 cardPickerManager.cardsPicked = 0;
                 cardPickerManager.ClearCards();
-                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(false);
+                CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(false);
                 buttonDonePicking.SetActive(false);
                 defaultCamera.SetActive(false);
                 buttonRerollCards.SetActive(false);
@@ -133,7 +133,7 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.turorial:
                 break;
             case GameState.startingDeck:
-                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(true);
                 CardPickerManager.instance.UpdateCardCounter();
                 buttonDonePicking.SetActive(true);
                 buttonRerollCards.SetActive(true);
@@ -171,7 +171,7 @@ public class GameplayLoopManager : MonoBehaviour
                 GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins + 1);
                 buttonDonePicking.SetActive(true);
                 cardPickerManager.SpawnCards();
-                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(true);
                 CardPickerManager.instance.UpdateCardCounter();
                 buttonRerollCards.SetActive(true);
                 defaultCamera.SetActive(true);
