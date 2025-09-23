@@ -148,9 +148,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 5
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 5
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 0ffb92799d8141b498dc2ac3217c9012, type: 2}
   m_IncludeLayers:
