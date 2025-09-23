@@ -5042,8 +5042,7 @@ MonoBehaviour:
   originalPrefab: {fileID: 0}
   cardSprite: {fileID: 21300000, guid: 4d75e2d5724ad124ba61ceb31fdf9701, type: 3}
   platformSprite: {fileID: 0}
-  cardText: There's no excitement in already knowing what a card does, take the gamble
-    to find out!
+  cardText: Turns into a random card, c'mon, take the gamble!
   possibleEffects:
   - {fileID: -8374134481402471380, guid: 71d6dfcc5ebc5d541be4790e6de5be96, type: 3}
   - {fileID: 4898158841586021447, guid: e6e26270d4bcbe4438a4c64ee0a9852b, type: 3}

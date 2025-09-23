@@ -1,8 +1,9 @@
 using JetBrains.Annotations;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public enum GameState
 {
@@ -28,6 +29,7 @@ public class GameplayLoopManager : MonoBehaviour
     public GameObject cameraPanPrefab;
     private GameObject theCameraPrefab;
     public GameObject defaultCamera;
+    public GameObject resetButton;
     public CardPickerManager cardPickerManager;
     public List<CardPlacer> cardPlacers = new();
 
@@ -112,12 +114,13 @@ public class GameplayLoopManager : MonoBehaviour
                 
                 break;
             case GameState.choosingCards:
-                GameManager.instance.cardsInDeck.Clear();
                 cardPickerManager.cardsPicked = 0;
                 cardPickerManager.ClearCards();
+                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(false);
                 buttonDonePicking.SetActive(false);
                 defaultCamera.SetActive(false);
-            break;
+                buttonRerollCards.SetActive(false);
+                break;
             case GameState.shop:
             break;
         }
@@ -130,6 +133,8 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.turorial:
                 break;
             case GameState.startingDeck:
+                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.UpdateCardCounter();
                 buttonDonePicking.SetActive(true);
                 buttonRerollCards.SetActive(true);
                 GameManager.instance.UpdateCoinCount(7);
@@ -137,6 +142,7 @@ public class GameplayLoopManager : MonoBehaviour
                 defaultCamera.SetActive(true);
                 break;
             case GameState.placingCards:
+                resetButton.SetActive(true);
                 GameManager gamemanager = GameManager.instance;
                 foreach (var card in gamemanager.cardsInDeck)
                 {
@@ -159,9 +165,15 @@ public class GameplayLoopManager : MonoBehaviour
                 buttonChangePlacements.SetActive(true);
                 break;
             case GameState.choosingCards:
+                resetButton.SetActive(false);
+                GameManager.instance.cardsInDeck.Clear();
+                GameManager.instance.cardsInHand.Clear();
                 GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins + 1);
                 buttonDonePicking.SetActive(true);
                 cardPickerManager.SpawnCards();
+                CardPickerManager.instance.cardsPickedCounter.gameObject.SetActive(true);
+                CardPickerManager.instance.UpdateCardCounter();
+                buttonRerollCards.SetActive(true);
                 defaultCamera.SetActive(true);
                 break;
             case GameState.shop:
