@@ -18,6 +18,7 @@ public class CardPickerManager : MonoBehaviour
     public AudioClip cardFoldNoise;
     [HideInInspector] public int cardsPicked;
     public TMP_Text cardsPickedCounter;
+    public Canvas theCanvas;
 
     [Button]
     void Awake()
@@ -40,7 +41,7 @@ public class CardPickerManager : MonoBehaviour
         for (int i = 0; i < cardsCount; i++)
         {
             currentCardbase = GenerateRandomCard();
-            GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, positions[i], Quaternion.identity, transform);
+            GameObject cardSelectionObject = Instantiate(CardUIPickerPrefab, theCanvas.pixelRect.center + positions[i] * theCanvas.pixelRect.width/3.5f, Quaternion.identity, transform);
             cardSelectionObject.transform.localScale = Vector3.one * 200;
             CardPickerUI pickerUIScript = cardSelectionObject.GetComponent<CardPickerUI>();
             pickerUIScript.Initiate();
