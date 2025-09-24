@@ -9,6 +9,6 @@ public class EndLevel : MonoBehaviour
 
     public void CompleteGame()
     {
-        GameplayLoopManager.instance.SetState((int)GameState.choosingCards);
+        GameplayLoopManager.instance.SetState((int)GameState.startingDeck);
     }
 }
