@@ -67400,6 +67400,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9142660050700018643, guid: fa9115d3a09ce8240838f3af4160808b, type: 3}
     - target: {fileID: 6500111865077204741, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: m_text
+      value: Start Platforming
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500111865077204741, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 3b0980134ade7794c98cefbc2e13bf17, type: 2}
@@ -67459,6 +67463,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4c5b1536785e79f4a9df7a12a20379bc, type: 3}
+    - target: {fileID: 6660529108938484566, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 6660529108938484566, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 60

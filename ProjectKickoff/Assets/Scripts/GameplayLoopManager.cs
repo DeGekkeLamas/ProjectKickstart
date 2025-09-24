@@ -88,8 +88,25 @@ public class GameplayLoopManager : MonoBehaviour
                 buttonDonePlacing.SetActive(false);
                 buttonToggleVisibility.SetActive(false);
                 Destroy(theCameraPrefab);
+                defaultCamera.SetActive(true);
+                resetButton.SetActive(false);
+                if (newState != GameState.platforming)
+                {
+                    if (CardPlacer.cardContainer != null)
+                    {
+                        Transform placerTransform = CardPlacer.cardContainer.transform;
+                        for (int i = 0; i < placerTransform.childCount; i++)
+                        {
+                            Destroy(placerTransform.GetChild(i).gameObject);
+                        }
+                    }
+                    GameManager.instance.cardsInDeck.Clear();
+                    CardPickerManager.instance.cardsPicked = 0;
+                    CardPickerManager.instance.UpdateCardCounter();
+                }
                 break;
             case GameState.platforming:
+                defaultCamera.SetActive(true);
                 buttonChangePlacements.SetActive(false);
                 player.SetActive(false);
                 player.transform.position = player.GetComponent<PlayerController>().worldSpawn;
@@ -111,6 +128,12 @@ public class GameplayLoopManager : MonoBehaviour
                         }
                     }
                 }
+                if (newState == GameState.startGame)
+                {
+                    GameManager.instance.cardsInDeck.Clear();
+                    CardPickerManager.instance.cardsPicked = 0;
+                    CardPickerManager.instance.UpdateCardCounter();
+                }
                 
                 break;
             case GameState.choosingCards:
@@ -129,6 +152,8 @@ public class GameplayLoopManager : MonoBehaviour
         switch (newState)//initiate stuff
         {
             case GameState.startGame:
+                buttonMakeStartIngDeck.SetActive(true);
+                
                 break;
             case GameState.turorial:
                 break;
@@ -142,6 +167,7 @@ public class GameplayLoopManager : MonoBehaviour
                 defaultCamera.SetActive(true);
                 break;
             case GameState.placingCards:
+                defaultCamera.SetActive(false);
                 resetButton.SetActive(true);
                 GameManager gamemanager = GameManager.instance;
                 foreach (var card in gamemanager.cardsInDeck)
@@ -161,11 +187,11 @@ public class GameplayLoopManager : MonoBehaviour
                 theCameraPrefab = Instantiate(cameraPanPrefab, player.transform.position, Quaternion.identity, transform);
                 break;
             case GameState.platforming:
+                defaultCamera.SetActive(false);
                 player.SetActive(true);
                 buttonChangePlacements.SetActive(true);
                 break;
             case GameState.choosingCards:
-                resetButton.SetActive(false);
                 GameManager.instance.cardsInDeck.Clear();
                 GameManager.instance.cardsInHand.Clear();
                 GameManager.instance.UpdateCoinCount(GameManager.instance.collectedCoins + 1);

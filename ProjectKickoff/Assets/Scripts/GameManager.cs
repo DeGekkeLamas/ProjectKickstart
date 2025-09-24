@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour
     {
         cardsInDeck.Add(cardToAdd);
     }
-    public void RemoveCardFromDeck(CardBase cardToAdd)
+    public void RemoveCardFromDeck(CardBase cardToRemove)
     {
-        cardsInDeck.Remove(cardToAdd);
+        cardsInDeck.Remove(cardToRemove);
     }
 
     public void UpdateCoinCount(int newValue)
