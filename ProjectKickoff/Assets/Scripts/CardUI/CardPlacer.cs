@@ -18,8 +18,8 @@ public class CardPlacer : MonoBehaviour
     // These are used for displaying the bounds of moving platforms
     Vector3 moveBoundsMin;
     Vector3 moveBoundsMax;
-    GameObject moveDisplayMin;
-    GameObject moveDisplayMax;
+    SpriteRenderer moveDisplayMin;
+    SpriteRenderer moveDisplayMax;
     bool isMovingPlatform;
 
     private void Start()
@@ -73,18 +73,13 @@ public class CardPlacer : MonoBehaviour
     void PlaceMoveDisplays()
     {
         isMovingPlatform = true;
-        moveDisplayMin = new("MoveDisplayMin");
-        moveDisplayMax = new("MoveDisplayMax");
+        GameObject moveDisplayObj = new("MoveDisplayMin");
+        moveDisplayMin = moveDisplayObj.AddComponent<SpriteRenderer>();
         moveDisplayMin.transform.parent = this.transform;
-        moveDisplayMax.transform.parent = this.transform;
-        SpriteRenderer minSprite = moveDisplayMin.AddComponent<SpriteRenderer>();
-        SpriteRenderer maxSprite = moveDisplayMax.AddComponent<SpriteRenderer>();
-        minSprite.sprite = this.renderer.sprite;
-        maxSprite.sprite = this.renderer.sprite;
-        minSprite.renderingLayerMask = renderer.renderingLayerMask;
-        maxSprite.renderingLayerMask = renderer.renderingLayerMask;
-        minSprite.color = new(1,1,1,0.5f);
-        maxSprite.color = new(1,1,1,0.5f);
+        moveDisplayMin.sprite = renderer.sprite;
+        moveDisplayMin.sortingOrder = renderer.sortingOrder;
+        moveDisplayMax = Instantiate(moveDisplayMin, this.transform);
+        moveDisplayMax.name = "MoveDisplayMax";
     }
 
     void Update()
@@ -122,6 +117,8 @@ public class CardPlacer : MonoBehaviour
         {
             moveDisplayMin.transform.position = this.transform.position + moveBoundsMin;
             moveDisplayMax.transform.position = this.transform.position + moveBoundsMax;
+            moveDisplayMin.color = hitSomething ? spotUnavailableColor : spotAvailableColor - new Color(0,0,0,0.5f);
+            moveDisplayMax.color = hitSomething ? spotUnavailableColor : spotAvailableColor - new Color(0,0,0,0.5f);
         }
 
         if (Input.GetMouseButtonDown(0) && !cardPosSet)

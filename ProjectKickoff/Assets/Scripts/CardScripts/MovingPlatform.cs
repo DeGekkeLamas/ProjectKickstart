@@ -21,6 +21,6 @@ public class MovingPlatform : CardBase
         Vector3 oldPos = startPos + new Vector3(math.sin(Time.timeSinceLevelLoad - Time.deltaTime), 0, 0);
         Vector3 currentPos = startPos + new Vector3(math.sin(Time.timeSinceLevelLoad), 0, 0);
         Vector3 diffPos = currentPos - oldPos;
-        playerScript.DoMove(diffPos);
+        playerScript.DoMove(diffPos * movementRange * speed);
     }
 }
