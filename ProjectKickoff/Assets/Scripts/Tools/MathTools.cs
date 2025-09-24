@@ -82,4 +82,9 @@ public static class MathTools
     {
         return new( Mathf.Clamp(input.x, min.x, max.x), Mathf.Clamp(input.y, min.y, max.y), Mathf.Clamp(input.z, min.z, max.z) );
     }
+
+    public static Vector3 Vector3Abs(Vector3 input)
+    {
+        return new(Mathf.Abs(input.x), Mathf.Abs(input.y), Mathf.Abs(input.z));
+    }
 }

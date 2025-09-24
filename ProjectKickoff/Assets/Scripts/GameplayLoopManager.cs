@@ -68,7 +68,6 @@ public class GameplayLoopManager : MonoBehaviour
             break;
             case GameState.startingDeck:
                 CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(false);
-                cardPickerManager.ClearCards();
                 buttonDonePicking.SetActive(false);
                 buttonRerollCards.SetActive(false);
                 defaultCamera.SetActive(false);
@@ -133,6 +132,7 @@ public class GameplayLoopManager : MonoBehaviour
             case GameState.turorial:
                 break;
             case GameState.startingDeck:
+                cardPickerManager.ClearCards();
                 CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(true);
                 CardPickerManager.instance.UpdateCardCounter();
                 buttonDonePicking.SetActive(true);

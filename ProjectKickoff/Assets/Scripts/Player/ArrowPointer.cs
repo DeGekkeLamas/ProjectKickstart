@@ -9,12 +9,6 @@ public class ArrowPointer : MonoBehaviour
     {
         Vector3 difference = target.position - Camera.main.transform.position;
         Vector3 direction = difference.normalized;
-        DebugExtension.DebugArrow(Camera.main.transform.position, target.position - Camera.main.transform.position, Color.green);
-
-        // Rotate towards target
-        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * direction;
-        Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
-        this.transform.rotation = targetRotation;
 
         // Set position
         /// Position is clamped to camerabounds
@@ -26,8 +20,17 @@ public class ArrowPointer : MonoBehaviour
             camBounds.center + camBounds.extents);
 
         // Slight offset when on top of goal
-        //Vector3 diffFromTarget = target.position - this.transform.position;
-        //if (diffFromTarget.magnitude < offset) this.transform.position += diffFromTarget.normalized - diffFromTarget;
+        Vector3 diffFromTarget = this.transform.position - target.position;
+        if (diffFromTarget.magnitude < offset * offset) this.transform.position = target.position -
+                offset * offset * MathTools.Vector3Abs(diffFromTarget).normalized;
 
+        // Rotate towards target
+        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * direction;
+        Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
+        this.transform.rotation = targetRotation;
+
+        // Debug
+        DebugExtension.DebugArrow(Camera.main.transform.position, target.position - Camera.main.transform.position,
+            diffFromTarget.magnitude < offset ? Color.red : Color.green);
     }
 }
