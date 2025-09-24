@@ -533,16 +533,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: This is a deck-building rogue-like 2D platformer game. The game starts
-    by picking cards to add to your deck. You get 3 cards to choose as many as you
-    want from 7 times. Next you get to place the cards throughout the level. Make
-    sure to place them strategically. Next you platform through the level, making
-    use of the cards effects. if you don't like how you placed the cards, you can
-    go back and place them differently. you pick and place cards with the mouse.
-    you controll the player and the camera with WASD.  your goal is to reach one
-    of the flags in the level.
+    by picking cards to add to your deck. You will get a selection of 3 cards to
+    pick one, which you can reroll for a coin, with a maximum of 15 cards you can
+    hold at once. Next you get to place the cards throughout the level. Make sure
+    to place them strategically. Then you platform through the level, making use
+    of the cards effects. if you don't like how you placed the cards, you can go
+    back and place them differently. you pick and place cards with the mouse. you
+    controll the player and the camera with WASD.  your goal is to reach one of the
+    flags in the level. The plater can walljump and shift
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3b0980134ade7794c98cefbc2e13bf17, type: 2}
+  m_sharedMaterial: {fileID: -6419866236844935528, guid: 3b0980134ade7794c98cefbc2e13bf17, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -23001,7 +23002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2114132748
 MonoBehaviour:
   m_ObjectHideFlags: 0

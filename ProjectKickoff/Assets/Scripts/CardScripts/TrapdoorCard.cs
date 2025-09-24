@@ -25,6 +25,7 @@ public class TrapdoorCard : CardBase
         durationLeft -= Time.deltaTime;
         if (durationLeft < 0)
         {
+            isOpened = true;
             thisCardsCollider.enabled = false;
             StartCoroutine(OpenAnimation());
         }
@@ -47,13 +48,12 @@ public class TrapdoorCard : CardBase
 
     IEnumerator OpenAnimation()
     {
-        for(int i =  0; i < 90f/animationSpeed; i++)
+        for (int i =  0; i < 90f/animationSpeed; i++)
         {
             pivotL.transform.eulerAngles -= new Vector3(0, 0, animationSpeed);
             pivotR.transform.eulerAngles -= new Vector3(0, 0, -animationSpeed);
             yield return new WaitForFixedUpdate();
         }
-        isOpened = true;
     }
 
     IEnumerator CloseAnimation()
