@@ -24,6 +24,7 @@ public class GameplayLoopManager : MonoBehaviour
     public GameObject buttonDonePlacing;
     public GameObject buttonToggleVisibility;
     public GameObject buttonMakeStartIngDeck;
+    public GameObject buttonToggleTutorial;
     public GameObject buttonChangePlacements;
     public GameObject player;
     public GameObject cameraPanPrefab;
@@ -61,6 +62,7 @@ public class GameplayLoopManager : MonoBehaviour
         {
             case GameState.startGame:
                 buttonMakeStartIngDeck.SetActive(false);
+                buttonToggleTutorial.SetActive(false);
                 CardPickerManager.instance.cardsPickedCounter.transform.parent.gameObject.SetActive(true);
                 CardPickerManager.instance.UpdateCardCounter();
                 break;
@@ -152,7 +154,7 @@ public class GameplayLoopManager : MonoBehaviour
         {
             case GameState.startGame:
                 buttonMakeStartIngDeck.SetActive(true);
-                
+                buttonToggleTutorial.SetActive(true);
                 break;
             case GameState.turorial:
                 break;
