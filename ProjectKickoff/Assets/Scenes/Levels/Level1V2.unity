@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1622241217}
-  offset: 3
+  offset: 4
 --- !u!222 &1290260263
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67598,30 +67598,6 @@ PrefabInstance:
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: selectedCards.Array.size
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[0].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[0].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[1].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[1].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[2].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
-      propertyPath: positions.Array.data[2].y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: 'selectedCards.Array.data[0]'

@@ -1,8 +1,9 @@
-using UnityEngine;
 using NaughtyAttributes;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 /// <summary>
 /// this is a base class for card effects, also place this on cards without script based effects, at this is used for their card data too
@@ -17,6 +18,10 @@ public class CardBase : MonoBehaviour
     [InfoBox("platformSprite is only needed if the root gameobject with this has no spriterenderer, otherwise leave this empty")]
     public Sprite platformSprite;
     [TextArea] public string cardText;
+
+    private Vector3 originalMousePos;
+    private Vector3 currentMousePos;
+
     private void Start() { StartEffect(); }
     private void Update() { UpdateEffect(); }
 
@@ -39,7 +44,35 @@ public class CardBase : MonoBehaviour
     private void OnMouseDown()
     {
         if (GameplayLoopManager.instance.currentState != GameState.placingCards) return;
+        originalMousePos = GetMousePos();
+    }
+    private void OnMouseDrag()
+    {
+        currentMousePos = GetMousePos();
+        if ((originalMousePos - currentMousePos).magnitude > .5f) // Create card placer to move card
+        {
+            GameObject obj = new("Cardmover");
+            CardPlacer placer = obj.AddComponent<CardPlacer>();
+            GameplayLoopManager.instance.cardPlacers.Add(placer);
+            placer.card = originalPrefab;
+            transform.position = currentMousePos;
+            Destroy(this.gameObject);
+        }
+    }
+    private void OnMouseUp()
+    {
+        if ((originalMousePos - currentMousePos).magnitude < .5f) PickupCard();
+    }
 
+    Vector3 GetMousePos()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0;
+        return mouseWorldPos;
+    }
+
+    void PickupCard()
+    {
         GameManager.instance.AddCardToHand(originalPrefab);
         AudioPlayer.Play(AudioPlayer.instance.placementSound);
         Destroy(this.gameObject);
@@ -59,6 +92,4 @@ public class CardBase : MonoBehaviour
         match = null;
         return false;
     }
-
-    
 }

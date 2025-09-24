@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 using Unity.VisualScripting;
 
 public class CardPlacer : MonoBehaviour
@@ -10,9 +10,9 @@ public class CardPlacer : MonoBehaviour
     public CardBase card;
     public static GameObject cardContainer;
     new SpriteRenderer renderer;
-    private Vector3 cardPosition;
-    private float cardRotation;
-    private bool cardPosSet;
+    Vector3 cardPosition;
+    float cardRotation;
+    bool cardPosSet;
     Bounds objectBounds;
 
     // These are used for displaying the bounds of moving platforms
@@ -64,10 +64,6 @@ public class CardPlacer : MonoBehaviour
             moveBoundsMax = new(0, elevator.movementRange);
             PlaceMoveDisplays();
         }
-
-        cardRotation = 0;
-        cardPosition = Vector3.zero;
-        cardPosSet = false;
     }
 
     void PlaceMoveDisplays()
