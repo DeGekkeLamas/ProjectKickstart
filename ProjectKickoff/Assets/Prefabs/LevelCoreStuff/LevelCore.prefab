@@ -2976,15 +2976,16 @@ MonoBehaviour:
   - {fileID: 3966641550341690604, guid: 342133abf8fc12340a4d3de017982202, type: 3}
   cardsCount: 3
   positions:
-  - {x: 250, y: 250}
-  - {x: 500, y: 250}
-  - {x: 750, y: 250}
+  - {x: -1, y: -0.25}
+  - {x: 0, y: -0.25}
+  - {x: 1, y: -0.25}
   selectedCards: []
   currentCardbase: {fileID: 5272036955339726883, guid: 6b9715858fa32284488a4ed2d3f4ec71, type: 3}
   maxCardsToPick: 12
   cardFoldNoise: {fileID: 0}
   cardsPicked: 0
   cardsPickedCounter: {fileID: 0}
+  theCanvas: {fileID: 0}
 --- !u!1 &9221732543705253450
 GameObject:
   m_ObjectHideFlags: 0
