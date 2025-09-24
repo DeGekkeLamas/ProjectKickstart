@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         // Walk
         float movement = Input.GetAxis("Horizontal");
-        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier * moveSpeed : moveSpeed;
+        float usedMoveSpeed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? moveSpeed : sprintMultiplier * moveSpeed;
         DoMove(movement * usedMoveSpeed * Time.deltaTime * Vector2.right);
         
 

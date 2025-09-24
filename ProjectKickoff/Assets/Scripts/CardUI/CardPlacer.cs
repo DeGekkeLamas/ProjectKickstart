@@ -15,13 +15,20 @@ public class CardPlacer : MonoBehaviour
     private bool cardPosSet;
     Bounds objectBounds;
 
+    // These are used for displaying the bounds of moving platforms
+    Vector3 moveBoundsMin;
+    Vector3 moveBoundsMax;
+    SpriteRenderer moveDisplayMin;
+    SpriteRenderer moveDisplayMax;
+    bool isMovingPlatform;
+
     private void Start()
     {
-
         if (cardContainer == null) cardContainer = new GameObject("CardContainer");
         CardBase cardObject = Instantiate(card, this.transform.position, Quaternion.identity, this.transform);
         // Set object bounds
         objectBounds = cardObject.transform.GetComponent<Collider2D>().bounds;
+
         // Destroy physical card stuff
         Destroy(cardObject.GetComponent<Collider2D>());
         Destroy(cardObject.GetComponent<CardBase>());
@@ -42,9 +49,37 @@ public class CardPlacer : MonoBehaviour
             Destroy(cardObject.transform.GetChild(i-1).gameObject);
         }
 
+        // increase bounds for cards that move
+        if (card.TryGetComponent(out MovingPlatform moving))
+        {
+            objectBounds.size = new(objectBounds.size.x + 2 * moving.movementRange, objectBounds.size.y);
+            moveBoundsMin = new(-moving.movementRange, 0);
+            moveBoundsMax = new(moving.movementRange, 0);
+            PlaceMoveDisplays();
+        }
+        if (card.TryGetComponent(out ElevatorPlatform elevator))
+        {
+            objectBounds.size = new(objectBounds.size.x, objectBounds.size.y + 2 * elevator.movementRange);
+            moveBoundsMin = new(0, -elevator.movementRange);
+            moveBoundsMax = new(0, elevator.movementRange);
+            PlaceMoveDisplays();
+        }
+
         cardRotation = 0;
         cardPosition = Vector3.zero;
         cardPosSet = false;
+    }
+
+    void PlaceMoveDisplays()
+    {
+        isMovingPlatform = true;
+        GameObject moveDisplayObj = new("MoveDisplayMin");
+        moveDisplayMin = moveDisplayObj.AddComponent<SpriteRenderer>();
+        moveDisplayMin.transform.parent = this.transform;
+        moveDisplayMin.sprite = renderer.sprite;
+        moveDisplayMin.sortingOrder = renderer.sortingOrder;
+        moveDisplayMax = Instantiate(moveDisplayMin, this.transform);
+        moveDisplayMax.name = "MoveDisplayMax";
     }
 
     void Update()
@@ -68,12 +103,23 @@ public class CardPlacer : MonoBehaviour
         }
         transform.rotation = Quaternion.AngleAxis(cardRotation, Vector3.forward);
 
+
         // Check if valid spot on click
-        objectBounds.center = this.transform.position;
         RaycastHit2D pointOccupied = Physics2D.BoxCast(objectBounds.center, objectBounds.size, cardRotation, Vector2.zero);
         bool hitSomething = pointOccupied.collider != null;
-        DebugExtension.DebugBounds(objectBounds, hitSomething ? Color.green : Color.red);
+
+        // Visual effect
+        objectBounds.center = this.transform.position;
+        DebugExtension.DebugBounds(objectBounds, hitSomething ? Color.red : Color.green);
         renderer.color = hitSomething ? spotUnavailableColor : spotAvailableColor;
+        // moving platform displays
+        if (isMovingPlatform)
+        {
+            moveDisplayMin.transform.position = this.transform.position + moveBoundsMin;
+            moveDisplayMax.transform.position = this.transform.position + moveBoundsMax;
+            moveDisplayMin.color = hitSomething ? spotUnavailableColor : spotAvailableColor - new Color(0,0,0,0.5f);
+            moveDisplayMax.color = hitSomething ? spotUnavailableColor : spotAvailableColor - new Color(0,0,0,0.5f);
+        }
 
         if (Input.GetMouseButtonDown(0) && !cardPosSet)
         {

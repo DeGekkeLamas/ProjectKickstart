@@ -151,3 +151,5 @@ MonoBehaviour:
   cardSprite: {fileID: 21300000, guid: 7c5dbe91e030fb240ad3be8a222c8a95, type: 3}
   platformSprite: {fileID: 0}
   cardText: This card moves back and forth, wings allow it to fly.
+  movementRange: 4
+  speed: 1
