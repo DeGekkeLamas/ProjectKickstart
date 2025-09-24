@@ -77,4 +77,9 @@ public static class MathTools
     {
         return new(input.x % amount.x, input.y % amount.y, input.z % amount.z);
     }
+
+    public static Vector3 Vector3Clamp(Vector3 input, Vector3 min, Vector3 max)
+    {
+        return new( Mathf.Clamp(input.x, min.x, max.x), Mathf.Clamp(input.y, min.y, max.y), Mathf.Clamp(input.z, min.z, max.z) );
+    }
 }
