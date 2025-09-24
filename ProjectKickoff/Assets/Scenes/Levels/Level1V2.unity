@@ -22518,6 +22518,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292f2e057624dd5499d504d3d62f06a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &2120873236 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7917843484965805484, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+  m_PrefabInstance: {fileID: 6346292019230318430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6346292019230318430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67563,6 +67568,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2e99851c09d11bb49adaab1103e10890, type: 2}
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: theCanvas
+      value: 
+      objectReference: {fileID: 2120873236}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: cardFoldNoise
       value: 
       objectReference: {fileID: 8300000, guid: 2007350d3f690744fbbafb2151931176, type: 3}
@@ -67581,6 +67590,30 @@ PrefabInstance:
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: selectedCards.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[1].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[2].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
+      propertyPath: positions.Array.data[2].y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525258480029376426, guid: 2a9e331069f00414da0a387856fb1b6b, type: 3}
       propertyPath: 'selectedCards.Array.data[0]'

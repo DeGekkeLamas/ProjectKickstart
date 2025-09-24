@@ -28,6 +28,8 @@ public class FoldoutCard : MonoBehaviour
     {
         cardSet = this.transform.parent.parent.GetComponent<CardHandLayout>();
         originalScale = transform.localScale;
+        cardSet.CorrectHierarchy();
+        cardSet.CorrectDisplayOrder();
     }
 
     /// <summary>
@@ -70,7 +72,8 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
-        this.GetComponent<Canvas>().sortingOrder = 1;
+        cardSet.CorrectDisplayOrder();
+        this.GetComponent<Canvas>().sortingOrder = cardSet.currentCards.Count;
         //this.transform.parent.SetSiblingIndex(cardSet.currentCards.Count - 1);
         isFoldingOut = false;
     }
@@ -110,8 +113,8 @@ public class FoldoutCard : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
-        //cardSet.CorrectHierarchy();
-        this.GetComponent<Canvas>().sortingOrder = 0;
+        
+        cardSet.CorrectDisplayOrder();
         isFoldingIn = false;
         hasEnteredHover = false;
     }

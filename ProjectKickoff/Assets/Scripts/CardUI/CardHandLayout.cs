@@ -52,6 +52,7 @@ public class CardHandLayout : MonoBehaviour
 
             // Correct hierarchy
             CorrectHierarchy();
+            CorrectDisplayOrder();
         }
     }
 
@@ -62,7 +63,15 @@ public class CardHandLayout : MonoBehaviour
     {
         for (int i = 0; i < currentCards.Count; i++)
         {
-            currentCards[i].transform.parent.SetSiblingIndex(0);
+            currentCards[i].transform.parent.SetSiblingIndex(i);
+        }
+    }
+
+    public void CorrectDisplayOrder()
+    {
+        for (int i = 0; i < currentCards.Count; i++)
+        {
+            currentCards[i].transform.GetComponentInChildren<Canvas>().sortingOrder = i;
         }
     }
 
