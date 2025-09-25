@@ -8,10 +8,6 @@ public class ElevatorPlatform : CardBase
     public float speed = 1;
 
     private float timer;
-    private void Update()
-    {
-        timer += Time.deltaTime;
-    }
 
     protected override void StartEffect()
     {
@@ -19,6 +15,7 @@ public class ElevatorPlatform : CardBase
     }
     protected override void UpdateEffect()
     {
+        timer += Time.deltaTime;
         transform.position = startPos + new Vector3(0, math.sin(timer * speed), 0) * movementRange;
     }
 }
