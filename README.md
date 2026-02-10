@@ -1,6 +1,8 @@
 # The Devils Gambit
 
-[Itch.io page ->](https://degekkelamas.itch.io/thedevilsgambit)
+[Itch.io page ->](https://degekkelamas.itch.io/thedevilsgambit)\
+[Arthur's portfolio page ->](https://arthurvanittersum.github.io)\
+[Kars' portfolio page ->](https://degekkelamas.github.io/Projects)
 
 This project was made for a group project, Project Kickstart, where the goal was to make a prototype we could pitch to a company.
 
